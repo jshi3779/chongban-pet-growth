@@ -121,9 +121,10 @@ function overview(){
   <div class="card"><h3>近 28 天打卡<small>全部宠物</small></h3><div class="heat">${heat}</div></div>
   <div class="card"><h3>待办提醒<small>全部宠物</small></h3>${rems.length?rems.slice(0,6).map(x=>`<div class="row"><div class="grow"><b>${KIND[x.r.kind].e} ${esc(x.p.name)} · ${esc(x.r.name)}</b><br><small>${x.r.next}</small></div>${x.left<0?`<span class="tag red">逾期${-x.left}天</span>`:x.left<=14?`<span class="tag y">${x.left}天后</span>`:`<span class="tag green">${x.left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办 ✅</div>'}</div>`;
 }
+function photo(c,src,alt){return `<figure class="pet-photo ${c}"><img src="assets/${src}" alt="${alt}" loading="lazy"><figcaption>灵感照片 · 示例</figcaption></figure>`}
 function community(){
   const seg=S.seg||'friends';
-  return`<div class="filters"><button class="chip ${seg==='friends'?'on':''}" data-seg="friends">📍 附近宠友</button><button class="chip ${seg==='share'?'on':''}" data-seg="share">💬 养宠广场</button></div>`+V[seg]();
+  return`<div class="community-intro"><span class="eyebrow">LITTLE MOMENTS, BIG LOVE</span><h2>每一份可爱，都值得被看见。</h2></div><div class="stories" aria-label="宠物灵感照片">${photo('', 'dog.jpg','阳光下的金毛犬')}${photo('', 'cat.jpg','好奇的小猫')}${photo('', 'cat-memory.jpg','猫咪的悠闲时光')}</div><div class="care-note"><span>每日小贴士</span><strong>把陪伴，写进每一个日常。</strong><i aria-hidden="true">✿</i></div><div class="filters segmented"><button class="chip ${seg==='friends'?'on':''}" data-seg="friends">📍 附近宠友</button><button class="chip ${seg==='share'?'on':''}" data-seg="share">💬 养宠广场</button></div>`+V[seg]();
 }
 
 const V={calendar,community,
@@ -131,13 +132,13 @@ const V={calendar,community,
   const p=pet();
   const w=recs('weight'),rem=reminders();
   return petSwitch()+`
-  <div class="hero">${ph("",`点击上传 ${esc(p.name)} 的照片`)}<div class="heart">♥</div></div>
-  <div class="card profile"><h2>${esc(p.name)} <span style="font-size:18px;color:var(--b)">${p.gender||""}</span></h2><div class="meta"><span>${esc(p.type)} · ${esc(p.breed||"未填品种")}</span><span>🎂 ${p.birthday||"-"} · ${p.birthday?age(p.birthday):""}</span></div>
+  <div class="hero"><div class="hero-label"><span>MY LITTLE COMPANION</span><span aria-hidden="true">♡</span></div>${photo("hero-photo",p.type==='狗'?'dog.jpg':'cat.jpg','宠物档案封面示例照片')}<span class="hero-caption">一起长大 · 一起探索</span></div>
+  <div class="card profile"><div class="eyebrow">HELLO, MY FRIEND</div><h2>${esc(p.name)} <span style="font-size:18px;color:var(--b)">${p.gender||""}</span></h2><div class="meta"><span>${esc(p.type)} · ${esc(p.breed||"未填品种")}</span><span>🎂 ${p.birthday||"-"} · ${p.birthday?age(p.birthday):""}</span></div>
    <div class="stats"><div><strong>${w[0]?w[0].value:"-"}</strong><span>当前体重 kg</span></div><div><strong>${recs("vaccine").length}</strong><span>疫苗记录</span></div><div><strong>${recs("deworm").length}</strong><span>驱虫记录</span></div></div></div>
   <div class="bento">
    <button class="p" data-add="weight"><i>⚖️</i>记体重</button><button data-add="vaccine"><i>💉</i>打疫苗</button><button data-add="deworm"><i>🐛</i>驱虫</button><button data-add="milestone"><i>🎉</i>成长瞬间</button>
    <button class="soon" data-tab="community"><i>📍</i>附近宠友</button><button class="soon" data-tab="community"><i>📸</i>晒日常</button><button class="soon" data-soon="就医记录"><i>🏥</i>就医</button><button class="soon" data-soon="宠物商城"><i>🛒</i>用品</button></div>
-  <div class="card"><h3>成长相册<small>点击上传照片</small></h3><div class="collage">${ph("a","照片 1")}${ph("b","照片 2")}${ph("c","照片 3")}</div></div>
+  <div class="card album"><h3>成长相册<small>灵感照片 · 示例</small></h3><div class="collage">${photo("a","cat.jpg","猫咪的好奇瞬间")}${photo("b","dog.jpg","狗狗的户外时光")}${photo("c","cat-memory.jpg","猫咪的午后")}</div><div class="album-footer"><span>♡ 小小瞬间，慢慢收藏</span><span>OUR MEMORIES</span></div></div>
   <div class="card"><h3>健康提醒<small>疫苗 / 驱虫到期</small></h3>${rem.length?rem.slice(0,4).map(({r,left})=>`<div class="row"><div class="grow"><b>${KIND[r.kind].e} ${esc(r.name)}</b><br><small>下次：${r.next}</small></div>${left<0?`<span class="tag red">逾期${-left}天</span>`:left<=14?`<span class="tag y">${left}天后</span>`:`<span class="tag green">${left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办，健康状态良好 ✅</div>'}</div>
   <div class="card"><h3>体重曲线<small><button class="x" data-add="weight">＋记录</button></small></h3>${chart()}</div>
   <div class="card"><h3>疫苗 &amp; 驱虫</h3>${[...recs('vaccine'),...recs('deworm')].sort((a,b)=>b.date.localeCompare(a.date)).map(recRow).join('')||'<div class="empty">还没有记录</div>'}</div>
@@ -157,7 +158,8 @@ const V={calendar,community,
 function render(){
   if(!V[S.tab])S.tab='home';
   $('#view').innerHTML=V[S.tab]();
-  document.querySelectorAll('.tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
+  document.querySelector('.app').dataset.page=S.tab;
+  document.querySelectorAll('.tabbar button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===S.tab);b.setAttribute('aria-current',b.dataset.tab===S.tab?'page':'false');b.setAttribute('aria-label',b.textContent.trim());});
   save();
 }
 function sheet(html,onsubmit){

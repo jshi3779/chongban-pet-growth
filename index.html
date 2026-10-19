@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>宠伴 · 养宠成长记录</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="loc">📍 <span>上海 · 徐汇</span></div>
+    <div class="search">搜索宠物知识、附近宠友</div>
+  </header>
+
+  <main id="view"></main>
+
+  <nav class="tabbar">
+    <button data-tab="home" class="on"><i>🐾</i>档案</button>
+    <button data-tab="calendar"><i>📅</i>日历</button>
+    <button data-tab="timeline"><i>🕒</i>时间线</button>
+    <button data-tab="overview"><i>📊</i>总览</button>
+    <button data-tab="community"><i>💬</i>社区</button>
+  </nav>
+</div>
+
+<div id="sheet" class="sheet" hidden>
+  <div class="mask"></div>
+  <form class="panel" id="form"></form>
+</div>
+<div id="toast" class="toast" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>

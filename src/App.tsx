@@ -72,11 +72,6 @@ export default function App() {
       <div className="stage">
         <div className="phone" data-page={s.tab}>
           <div className="app">
-          <header className="top">
-            <button className="circ" data-act="addpet" aria-label="添加宠物" onClick={api.openPet}>＋</button>
-            <div><h1>宠伴<span> PET DIARY</span></h1><div className="sub">记录每一个小小的成长瞬间</div></div>
-            <span className="circ circ--ghost" aria-hidden="true" />
-          </header>
           <main id="view" key={s.tab}><View /></main>
           </div>
           <nav className="sd-tabbar" aria-label="主导航">

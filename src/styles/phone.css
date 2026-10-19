@@ -29,3 +29,7 @@
 .mg.today b{color:var(--color-primary-500)}
 .mg.sel{background:var(--color-text-primary);color:var(--color-bg-card)}
 .mg.sel.today b{color:var(--color-bg-card)}
+/* 去掉顶部标题栏后的各页顶部留白（让出圆角与刘海区域） */
+.phone[data-page="calendar"] main,.phone[data-page="timeline"] main{padding-top:var(--space-3xl)}
+.phone[data-page="community"] .commnav{padding-top:var(--space-xl);margin-top:0}
+.phone[data-page="home"] .pethead{padding-top:var(--space-3xl)}

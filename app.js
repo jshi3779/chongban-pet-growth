@@ -5,6 +5,8 @@ const today=()=>new Date().toISOString().slice(0,10);
 const dayDiff=(a,b)=>Math.round((new Date(a)-new Date(b))/864e5);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const KIND={weight:{n:'体重',c:'w',e:'⚖️'},vaccine:{n:'疫苗',c:'',e:'💉'},deworm:{n:'驱虫',c:'d',e:'🐛'},milestone:{n:'成长瞬间',c:'m',e:'🎉'}};
+const PAW=`<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6.500" cy="10" r="2"/><circle cx="10" cy="5.800" r="2"/><circle cx="14.500" cy="5.800" r="2"/><circle cx="18" cy="10" r="2"/><path d="M12 12.500c-3 0-5.500 2.600-5.500 4.800 0 1.600 1.600 2.200 3 1.800 1-.3 1.600-.5 2.500-.5s1.500.2 2.500.5c1.400.4 3-.2 3-1.800 0-2.200-2.500-4.800-5.500-4.800z"/></svg>`;
+const ph=(c,t)=>`<div class="ph ${c||''}"><div>${PAW}<span>${t||'宠物照片占位'}</span></div></div>`;
 const EMOJI={猫:'🐱',狗:'🐶',兔子:'🐰',仓鼠:'🐹',其他:'🐾'};
 
 function seed(){
@@ -54,8 +56,8 @@ function chart(){
   let g='';for(let i=0;i<4;i++){const v=lo+(hi-lo)*i/3,y=Y(v);g+=`<line x1="${p.l}" x2="${W-p.r}" y1="${y}" y2="${y}" stroke="#eee"/><text x="${p.l-6}" y="${y+4}" font-size="10" fill="#999" text-anchor="end">${v.toFixed(1)}</text>`}
   const line=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join('');
   const area=line+`L${last[0]} ${H-p.b}L${pts[0][0]} ${H-p.b}Z`;
-  return`<svg class="chart" viewBox="0 0 ${W} ${H}">${g}<path d="${area}" fill="#FFD100" opacity=".22"/><path d="${line}" fill="none" stroke="#FFC300" stroke-width="2.5" stroke-linejoin="round"/>`+
-   pts.map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r="4" fill="#fff" stroke="#222" stroke-width="2"/>`).join('')+
+  return`<svg class="chart" viewBox="0 0 ${W} ${H}">${g}<path d="${area}" fill="#4D98F7" opacity=".14"/><path d="${line}" fill="none" stroke="#4D98F7" stroke-width="3" stroke-linejoin="round"/>`+
+   pts.map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r="4.5" fill="#fff" stroke="#4D98F7" stroke-width="2.5"/>`).join('')+
    `<text x="${p.l}" y="${H-6}" font-size="10" fill="#999">${w[0].date.slice(2)}</text><text x="${W-p.r}" y="${H-6}" font-size="10" fill="#999" text-anchor="end">${w[w.length-1].date.slice(2)}</text>`+
    `<text x="${last[0]}" y="${last[1]-9}" font-size="11" font-weight="700" text-anchor="end">${w[w.length-1].value}kg</text></svg>`;
 }
@@ -91,7 +93,7 @@ function calendar(){
   const sel=c.sel,sl=byDay[sel]||[],due=dueDay[sel];
   const future=sel>today();
   return petSwitch()+`<div class="card"><div class="calhead"><button class="x" data-calnav="-1">‹</button><b>${c.y}年${c.m+1}月</b><button class="x" data-calnav="1">›</button></div>
-  <div class="stats" style="margin:0 0 10px"><div><strong>${streak(p.id)}</strong><span>连续打卡 天</span></div><div><strong>${checked}</strong><span>本月已打卡 天</span></div><div><strong>${all.length}</strong><span>累计记录</span></div></div>
+  <div class="stats" style="margin:0 0 12px"><div><strong>${streak(p.id)}</strong><span>连续打卡 天</span></div><div><strong>${checked}</strong><span>本月已打卡 天</span></div><div><strong>${all.length}</strong><span>累计记录</span></div></div>
   <div class="week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
   <div class="grid">${cells}</div>
   <div class="legend"><i class="dot weight"></i>体重 <i class="dot vaccine"></i>疫苗 <i class="dot deworm"></i>驱虫 <i class="dot milestone"></i>瞬间 <i class="dot due"></i>到期日</div></div>
@@ -104,7 +106,7 @@ function spark(pid){
   const w=recsOf(pid,'weight').slice().reverse().slice(-8);if(w.length<2)return'';
   const vs=w.map(x=>x.value),lo=Math.min(...vs),hi=Math.max(...vs);
   const pts=w.map((x,i)=>(i/(w.length-1)*100).toFixed(1)+','+(18-(hi-lo?(x.value-lo)/(hi-lo):.5)*16).toFixed(1)).join(' ');
-  return`<svg viewBox="0 0 100 20" width="80" height="24" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="#FFC300" stroke-width="2"/></svg>`;
+  return`<svg viewBox="0 0 100 20" width="80" height="24" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="#4D98F7" stroke-width="2"/></svg>`;
 }
 function overview(){
   const rems=[];S.pets.forEach(p=>reminders(p.id).forEach(x=>rems.push(Object.assign({p},x))));
@@ -113,8 +115,8 @@ function overview(){
   // 最近 28 天打卡热力
   const cnt={};S.records.forEach(r=>{cnt[r.date]=(cnt[r.date]||0)+1});
   let heat='';for(let i=27;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10),n=cnt[k]||0;heat+=`<i class="h h${Math.min(n,3)}" title="${k} ${n}条"></i>`}
-  return`<div class="card"><h3>全局总览<small>${today()}</small></h3><div class="stats" style="margin:0">
-   <div><strong>${S.pets.length}</strong><span>宠物</span></div><div><strong>${S.records.length}</strong><span>总记录</span></div><div><strong style="color:${overdue?'var(--red)':'inherit'}">${overdue}</strong><span>已逾期</span></div><div><strong>${soon}</strong><span>14天内到期</span></div></div></div>
+  return`<div class="card"><h3>全局总览<small>${today()}</small></h3><div class="stats c4">
+   <div><strong>${S.pets.length}</strong><span>宠物</span></div><div><strong>${S.records.length}</strong><span>总记录</span></div><div><strong style="color:${overdue?'#E5688E':'inherit'}">${overdue}</strong><span>已逾期</span></div><div><strong>${soon}</strong><span>14天内到期</span></div></div></div>
   <div class="card"><h3>我的宠物</h3>${S.pets.map(p=>{const w=recsOf(p.id,'weight')[0],nx=reminders(p.id)[0];return`<div class="row" style="cursor:pointer" data-goto="home" data-pet2="${p.id}"><div class="avatar" style="width:44px;height:44px;font-size:24px">${EMOJI[p.type]||'🐾'}</div><div class="grow"><b>${esc(p.name)}</b> <small>${p.birthday?age(p.birthday):''} · 连续打卡${streak(p.id)}天</small><br><small>${w?w.value+'kg':'未记录体重'}${nx?' · 下次'+esc(nx.r.name)+' '+nx.r.next:''}</small></div>${spark(p.id)}</div>`}).join('')}</div>
   <div class="card"><h3>近 28 天打卡<small>全部宠物</small></h3><div class="heat">${heat}</div></div>
   <div class="card"><h3>待办提醒<small>全部宠物</small></h3>${rems.length?rems.slice(0,6).map(x=>`<div class="row"><div class="grow"><b>${KIND[x.r.kind].e} ${esc(x.p.name)} · ${esc(x.r.name)}</b><br><small>${x.r.next}</small></div>${x.left<0?`<span class="tag red">逾期${-x.left}天</span>`:x.left<=14?`<span class="tag y">${x.left}天后</span>`:`<span class="tag green">${x.left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办 ✅</div>'}</div>`;
@@ -129,11 +131,13 @@ const V={calendar,community,
   const p=pet();
   const w=recs('weight'),rem=reminders();
   return petSwitch()+`
-  <div class="card"><div class="pet"><div class="avatar">${EMOJI[p.type]||'🐾'}</div><div><b>${esc(p.name)} ${p.gender||''}</b><p>${esc(p.type)} · ${esc(p.breed||'未填品种')}</p><p>生日 ${p.birthday||'-'} · ${p.birthday?age(p.birthday):''}</p></div></div>
-   <div class="stats"><div><strong>${w[0]?w[0].value:'-'}</strong><span>当前体重 kg</span></div><div><strong>${recs('vaccine').length}</strong><span>疫苗记录</span></div><div><strong>${recs('deworm').length}</strong><span>驱虫记录</span></div></div></div>
-  <div class="card"><div class="quick">
-   <button data-add="weight"><i>⚖️</i>记体重</button><button data-add="vaccine"><i>💉</i>打疫苗</button><button data-add="deworm"><i>🐛</i>驱虫</button><button data-add="milestone"><i>🎉</i>成长瞬间</button>
-   <button class="soon" data-tab="community"><i>📍</i>附近宠友</button><button class="soon" data-tab="community"><i>📸</i>晒日常</button><button class="soon" data-soon="就医记录"><i>🏥</i>就医</button><button class="soon" data-soon="宠物商城"><i>🛒</i>用品</button></div></div>
+  <div class="hero">${ph("",`点击上传 ${esc(p.name)} 的照片`)}<div class="heart">♥</div></div>
+  <div class="card profile"><h2>${esc(p.name)} <span style="font-size:18px;color:var(--b)">${p.gender||""}</span></h2><div class="meta"><span>${esc(p.type)} · ${esc(p.breed||"未填品种")}</span><span>🎂 ${p.birthday||"-"} · ${p.birthday?age(p.birthday):""}</span></div>
+   <div class="stats"><div><strong>${w[0]?w[0].value:"-"}</strong><span>当前体重 kg</span></div><div><strong>${recs("vaccine").length}</strong><span>疫苗记录</span></div><div><strong>${recs("deworm").length}</strong><span>驱虫记录</span></div></div></div>
+  <div class="bento">
+   <button class="p" data-add="weight"><i>⚖️</i>记体重</button><button data-add="vaccine"><i>💉</i>打疫苗</button><button data-add="deworm"><i>🐛</i>驱虫</button><button data-add="milestone"><i>🎉</i>成长瞬间</button>
+   <button class="soon" data-tab="community"><i>📍</i>附近宠友</button><button class="soon" data-tab="community"><i>📸</i>晒日常</button><button class="soon" data-soon="就医记录"><i>🏥</i>就医</button><button class="soon" data-soon="宠物商城"><i>🛒</i>用品</button></div>
+  <div class="card"><h3>成长相册<small>点击上传照片</small></h3><div class="collage">${ph("a","照片 1")}${ph("b","照片 2")}${ph("c","照片 3")}</div></div>
   <div class="card"><h3>健康提醒<small>疫苗 / 驱虫到期</small></h3>${rem.length?rem.slice(0,4).map(({r,left})=>`<div class="row"><div class="grow"><b>${KIND[r.kind].e} ${esc(r.name)}</b><br><small>下次：${r.next}</small></div>${left<0?`<span class="tag red">逾期${-left}天</span>`:left<=14?`<span class="tag y">${left}天后</span>`:`<span class="tag green">${left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办，健康状态良好 ✅</div>'}</div>
   <div class="card"><h3>体重曲线<small><button class="x" data-add="weight">＋记录</button></small></h3>${chart()}</div>
   <div class="card"><h3>疫苗 &amp; 驱虫</h3>${[...recs('vaccine'),...recs('deworm')].sort((a,b)=>b.date.localeCompare(a.date)).map(recRow).join('')||'<div class="empty">还没有记录</div>'}</div>

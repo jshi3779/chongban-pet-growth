@@ -11,7 +11,7 @@ function Card({ p }: { p: Post }) {
       <button className="post__open" aria-label={`查看帖子：${p.title}`} onClick={() => openDetail(p.id)}>
         {p.img
           ? <img className={`post__img post__img--${p.shape}`} src={`${import.meta.env.BASE_URL}assets/${p.img}`} alt={p.title} loading="lazy" />
-          : <div className={`post__txt post__img--${p.shape}`}><p>{p.body}</p></div>}
+          : <div className={`post__txt post__img--${p.shape}`}><p>{p.body || p.title}</p></div>}
         <h3>{p.title}</h3>
       </button>
       <div className="post__foot">

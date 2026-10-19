@@ -110,8 +110,6 @@ function overview(){
   const rems=[];S.pets.forEach(p=>reminders(p.id).forEach(x=>rems.push(Object.assign({p},x))));
   rems.sort((a,b)=>a.left-b.left);
   const overdue=rems.filter(x=>x.left<0).length,soon=rems.filter(x=>x.left>=0&&x.left<=14).length;
-  const feed=S.records.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id).slice(0,8);
-  const pn=id=>(S.pets.find(p=>p.id===id)||{}).name;
   // 最近 28 天打卡热力
   const cnt={};S.records.forEach(r=>{cnt[r.date]=(cnt[r.date]||0)+1});
   let heat='';for(let i=27;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10),n=cnt[k]||0;heat+=`<i class="h h${Math.min(n,3)}" title="${k} ${n}条"></i>`}
@@ -119,8 +117,7 @@ function overview(){
    <div><strong>${S.pets.length}</strong><span>宠物</span></div><div><strong>${S.records.length}</strong><span>总记录</span></div><div><strong style="color:${overdue?'var(--red)':'inherit'}">${overdue}</strong><span>已逾期</span></div><div><strong>${soon}</strong><span>14天内到期</span></div></div></div>
   <div class="card"><h3>我的宠物</h3>${S.pets.map(p=>{const w=recsOf(p.id,'weight')[0],nx=reminders(p.id)[0];return`<div class="row" style="cursor:pointer" data-goto="home" data-pet2="${p.id}"><div class="avatar" style="width:44px;height:44px;font-size:24px">${EMOJI[p.type]||'🐾'}</div><div class="grow"><b>${esc(p.name)}</b> <small>${p.birthday?age(p.birthday):''} · 连续打卡${streak(p.id)}天</small><br><small>${w?w.value+'kg':'未记录体重'}${nx?' · 下次'+esc(nx.r.name)+' '+nx.r.next:''}</small></div>${spark(p.id)}</div>`}).join('')}</div>
   <div class="card"><h3>近 28 天打卡<small>全部宠物</small></h3><div class="heat">${heat}</div></div>
-  <div class="card"><h3>待办提醒<small>全部宠物</small></h3>${rems.length?rems.slice(0,6).map(x=>`<div class="row"><div class="grow"><b>${KIND[x.r.kind].e} ${esc(x.p.name)} · ${esc(x.r.name)}</b><br><small>${x.r.next}</small></div>${x.left<0?`<span class="tag red">逾期${-x.left}天</span>`:x.left<=14?`<span class="tag y">${x.left}天后</span>`:`<span class="tag green">${x.left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办 ✅</div>'}</div>
-  <div class="card"><h3>最新动态</h3>${feed.map(r=>`<div class="row"><div class="grow"><b>${KIND[r.kind].e} ${esc(pn(r.petId))}：${r.kind==='weight'?'体重 '+r.value+' kg':esc(r.name)}</b><br><small>${r.date}</small></div></div>`).join('')}</div>`;
+  <div class="card"><h3>待办提醒<small>全部宠物</small></h3>${rems.length?rems.slice(0,6).map(x=>`<div class="row"><div class="grow"><b>${KIND[x.r.kind].e} ${esc(x.p.name)} · ${esc(x.r.name)}</b><br><small>${x.r.next}</small></div>${x.left<0?`<span class="tag red">逾期${-x.left}天</span>`:x.left<=14?`<span class="tag y">${x.left}天后</span>`:`<span class="tag green">${x.left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办 ✅</div>'}</div>`;
 }
 function community(){
   const seg=S.seg||'friends';

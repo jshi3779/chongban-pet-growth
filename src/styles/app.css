@@ -176,3 +176,6 @@ svg.chart{width:100%;display:block}
 .k-vaccine{--ic:var(--color-warning);--ic-bg:color-mix(in srgb,var(--color-warning) 14%,var(--color-bg-card))}
 .k-deworm{--ic:var(--color-success);--ic-bg:var(--tint-success)}
 .k-milestone{--ic:var(--color-violet);--ic-bg:color-mix(in srgb,var(--color-violet) 12%,var(--color-bg-card))}
+/* 顶栏日历入口：选中态用主色 */
+.circ.on{background:var(--color-primary-500);color:var(--color-bg-card)}
+.circ__ic{width:var(--space-xl);height:var(--space-xl);fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}

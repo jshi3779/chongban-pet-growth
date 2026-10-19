@@ -2,23 +2,24 @@
    UI 样式基线 · theme.css
    ------------------------------------------------------------
    由 style-dna 从「宠物追踪 App」截图提取生成（v1.0.0）。
+   ⚠️ v1.1：主色按 AGENTS.md 指示切换为扁平卡通橙 #FF7A59（色阶由 500 推算，ui-ux-pro-max-design-system.md 未提供，待校对）。
    下游页面统一 @import 本文件，禁止在页面内硬编码样式值。
    加载链：base.json → frontend/frontend-base.json → frontend/app.json
    ============================================================ */
 
 :root {
   /* ---------- 色彩 · 品牌主色 ---------- */
-  --color-primary-50:  #EDF3FF;
-  --color-primary-100: #D8E6FE;
-  --color-primary-300: #8AB1FC;
-  --color-primary-500: #3D7BFA;
-  --color-primary-700: #1F5CD9;
+  --color-primary-50:  #FFF1EC;
+  --color-primary-100: #FFDDD2;
+  --color-primary-300: #FFA68E;
+  --color-primary-500: #FF7A59;
+  --color-primary-700: #E0562F;
 
   /* ---------- 色彩 · 语义色 ---------- */
   --color-success: #34C759;
   --color-warning: #F5A623;
   --color-error:   #FF4D5C;
-  --color-info:    #3D7BFA;
+  --color-info:    #FF7A59;
   --color-violet:  #8B5CF6;
 
   /* ---------- 色彩 · 中性色 ---------- */

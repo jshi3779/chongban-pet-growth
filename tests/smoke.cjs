@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
  const browser=await chromium.launch({headless:true,...(process.env.BROWSER_CHANNEL?{channel:process.env.BROWSER_CHANNEL}:{})});
  const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('file:///'+path.resolve(__dirname,'../index.html').replaceAll('\\','/'));
+ await page.goto(process.env.BASE_URL||'http://localhost:4173/');
  await page.evaluate(()=>document.fonts.ready);
 
  await page.locator('[data-add="weight"]').first().click();

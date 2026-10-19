@@ -1,0 +1,60 @@
+/* ===== 打卡 / 日历页（周条 + 时段卡片 + 打卡列表）与底部导航 =====
+   ⚠️ 未覆盖样式：深色强调（选中日期、已完成胶囊、下一项横幅、选中导航），
+      兜底 Token --color-text-primary / --color-bg-card */
+.circ--ghost{visibility:hidden}
+.caltop{display:flex;align-items:center;gap:var(--space-sm);margin-bottom:var(--space-md)}
+.caltop h2{margin:0;flex:1;font-size:var(--font-size-h1);line-height:var(--line-height-h1);font-weight:var(--font-weight-bold)}
+.monthpill{display:flex;align-items:center;background:var(--color-bg-card);border-radius:var(--radius-full);box-shadow:var(--shadow-sm);height:var(--space-touch);padding:0 var(--space-xs);font-weight:var(--font-weight-medium);font-size:var(--font-size-body)}
+.monthpill .x{min-width:var(--space-touch);font-size:var(--font-size-h2);color:var(--color-text-primary);padding:0}
+.roundbtn{width:var(--space-touch);height:var(--space-touch);border-radius:var(--radius-full);background:var(--color-text-primary);color:var(--color-bg-card);font-size:var(--font-size-h2);display:grid;place-items:center;flex:none}
+.weekstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:var(--space-xs);margin-bottom:var(--space-lg)}
+.wd{display:flex;flex-direction:column;align-items:center;gap:var(--space-xs);padding:var(--space-sm) 0;min-height:calc(var(--unit)*1.75);border-radius:var(--radius-full);background:var(--color-bg-card);color:var(--color-text-primary)}
+.wd small{font-size:var(--font-size-caption);color:var(--color-text-tertiary)}
+.wd b{font-size:var(--font-size-h2);font-family:var(--font-family-number);font-weight:var(--font-weight-bold);line-height:var(--line-height-h2)}
+.wd em{font-style:normal;font-size:var(--font-size-caption);color:var(--color-text-tertiary);transform:scale(.9)}
+.wd.today b{color:var(--color-primary-500)}
+.wd.sel{background:var(--color-text-primary);color:var(--color-bg-card)}
+.wd.sel small,.wd.sel em{color:var(--color-primary-100)}
+.wd.sel.today b{color:var(--color-bg-card)}
+.daylist{margin-bottom:var(--space-sm)}
+.slot{display:flex;gap:var(--space-md);margin-bottom:var(--space-md);align-items:flex-start}
+.slot__t{width:calc(var(--unit)*1.1);flex:none;padding-top:var(--space-md);display:flex;flex-direction:column}
+.slot__t b{font-size:var(--font-size-body);font-weight:var(--font-weight-medium)}
+.slot__t small{color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.slotcard{flex:1;min-width:0;background:var(--color-bg-card);border-radius:var(--radius-xl);padding:var(--space-md);box-shadow:var(--shadow-sm)}
+.slotcard__top{display:flex;gap:var(--space-md);align-items:center}
+.slotcard__ic{width:var(--space-touch);height:var(--space-touch);border-radius:var(--radius-full);background:var(--color-bg-page);display:grid;place-items:center;font-size:var(--font-size-h2);flex:none}
+.slotcard__tx{display:flex;flex-direction:column;min-width:0}
+.slotcard__tx b{font-weight:var(--font-weight-medium);font-size:var(--font-size-h3)}
+.slotcard__tx small{color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.slotcard__foot{display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-sm)}
+.pill{display:inline-flex;align-items:center;gap:var(--space-xs);height:var(--space-xl);padding:0 var(--space-md);border-radius:var(--radius-full);font-size:var(--font-size-caption);font-weight:var(--font-weight-medium)}
+.pill--done{background:var(--color-text-primary);color:var(--color-bg-card)}
+.pill--soft{background:var(--color-bg-page);color:var(--color-text-secondary)}
+.pill--warn{background:var(--color-primary-500);color:var(--color-bg-card)}
+.pill__dot{width:var(--space-sm);height:var(--space-sm);border-radius:var(--radius-full);background:var(--color-success)}
+.openslot{flex:1;min-width:0;border:thin dashed var(--color-text-disabled);border-radius:var(--radius-xl);padding:var(--space-md);display:flex;justify-content:space-between;align-items:center;gap:var(--space-sm);color:var(--color-text-secondary)}
+.openslot__btns{display:flex;gap:var(--space-xs)}
+.openslot__btns button{width:var(--space-touch);height:var(--space-touch);border-radius:var(--radius-full);background:var(--color-bg-card);box-shadow:var(--shadow-sm);font-size:var(--font-size-h2)}
+.upnext{display:flex;align-items:center;gap:var(--space-md);background:var(--color-text-primary);color:var(--color-bg-card);border-radius:var(--radius-xl);padding:var(--space-md) var(--space-lg);margin-bottom:var(--space-md);box-shadow:var(--shadow-lg)}
+.upnext__ic{width:var(--space-touch);height:var(--space-touch);border-radius:var(--radius-md);background:var(--color-bg-card);display:grid;place-items:center;font-size:var(--font-size-h2);flex:none}
+.upnext small{display:block;color:var(--color-text-disabled);font-size:var(--font-size-caption)}
+.upnext b{font-weight:var(--font-weight-medium)}
+.chk{display:flex;flex-direction:column;gap:var(--space-sm)}
+.chkrow{display:flex;align-items:center;gap:var(--space-md);text-align:left;width:100%;background:var(--color-bg-card);border-radius:var(--radius-xl);padding:var(--space-md) var(--space-lg);box-shadow:var(--shadow-sm)}
+.chkrow__d{display:flex;flex-direction:column;align-items:center;width:var(--space-3xl);flex:none;padding-right:var(--space-md);border-right:thin solid var(--color-divider)}
+.chkrow__d small{font-size:var(--font-size-caption);color:var(--color-text-tertiary)}
+.chkrow__d b{font-family:var(--font-family-number);font-size:var(--font-size-h2);font-weight:var(--font-weight-medium);line-height:var(--line-height-h2)}
+.chkrow__thumb{width:var(--space-touch);height:var(--space-touch);border-radius:var(--radius-md);display:grid;place-items:center;font-size:var(--font-size-h2);flex:none;background:var(--ic-bg);color:var(--ic)}
+.chkrow__tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.chkrow__tx b{font-weight:var(--font-weight-medium);font-size:var(--font-size-body)}
+.chkrow__tx small{color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.chkrow__st{width:var(--space-2xl);height:var(--space-2xl);border-radius:var(--radius-full);display:grid;place-items:center;flex:none;font-size:var(--font-size-caption);font-weight:var(--font-weight-bold)}
+.chkrow__st--ok{background:var(--color-success);color:var(--color-bg-card);box-shadow:0 0 0 var(--space-xs) var(--tint-success)}
+.chkrow__st--open{border:thin solid var(--color-text-disabled);color:var(--color-text-tertiary)}
+/* 底部导航：悬浮胶囊，选中项为深色胶囊并显示文字 */
+.sd-tabbar{left:50%;bottom:calc(var(--space-lg) + env(safe-area-inset-bottom));width:calc(100% - var(--space-3xl)*2);max-width:calc(var(--unit)*8);border-top:0;border-radius:var(--radius-full);padding:var(--space-sm);box-shadow:var(--shadow-xl);gap:var(--space-xs)}
+.sd-tabbar__item{flex-direction:row;height:var(--space-touch);gap:var(--space-sm);padding:0 var(--space-md)}
+.sd-tabbar__item span{display:none}
+.sd-tabbar__item.on{background:var(--color-text-primary);color:var(--color-bg-card);flex:1.8}
+.sd-tabbar__item.on span{display:inline}

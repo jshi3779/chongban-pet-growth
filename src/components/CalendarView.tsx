@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useApp } from '../ctx';
 import { KIND, calInit, dayDiff, recsOf, reminders, streak, today, ymd } from '../utils';
 import type { Kind, PetRecord } from '../types';
@@ -27,6 +28,7 @@ function Status({ r }: { r: PetRecord }) {
 
 export function CalendarView() {
   const { s, pet, patch, openRecord, del } = useApp();
+  const [open, setOpen] = useState(false);
   const c = s.cal || calInit();
   const sel = c.sel || today();
   const all = recsOf(s, pet.id);
@@ -42,6 +44,10 @@ export function CalendarView() {
   // 图一风格的打卡列表：待办（来自到期提醒）在前，已完成记录在后
   const rem = reminders(s, pet.id);
   const done = all.slice(0, 8);
+  const y0 = parse(sel).getFullYear(), m0 = parse(sel).getMonth();
+  const lead = (new Date(y0, m0, 1).getDay() + 6) % 7, dim = new Date(y0, m0 + 1, 0).getDate();
+  const shiftMonth = (n: number) => { const t = new Date(y0, m0 + n, 1); go(fmt(t)); };
+  const step = (n: number) => (open ? shiftMonth(n) : go(addDays(sel, 7 * n)));
   const monthLabel = `${parse(sel).getFullYear()}年${parse(sel).getMonth() + 1}月`;
   const nearest = rem[0];
 
@@ -51,25 +57,48 @@ export function CalendarView() {
       <div className="caltop">
         <h2>打卡</h2>
         <div className="monthpill">
-          <button className="x" aria-label="上一周" data-calnav="-1" onClick={() => go(addDays(sel, -7))}>‹</button>
+          <button className="x" aria-label={open ? '上个月' : '上一周'} data-calnav="-1" onClick={() => step(-1)}>‹</button>
           <span>{monthLabel}</span>
-          <button className="x" aria-label="下一周" data-calnav="1" onClick={() => go(addDays(sel, 7))}>›</button>
+          <button className={`x expand ${open ? 'open' : ''}`} aria-label={open ? '收起月历' : '展开整月'} aria-expanded={open} data-calexpand onClick={() => setOpen(v => !v)}>
+            <svg viewBox="0 0 24 24" className="chev"><path d="M6 9l6 6 6-6" /></svg>
+          </button>
+          <button className="x" aria-label={open ? '下个月' : '下一周'} data-calnav="1" onClick={() => step(1)}>›</button>
         </div>
         <button className="roundbtn" aria-label="在所选日期添加记录" onClick={() => openRecord('weight', future ? today() : sel)}>＋</button>
       </div>
 
-      <div className="weekstrip" role="tablist">
-        {days.map((d, i) => {
-          const n = (byDay[d] || []).length, t = parse(d);
-          return (
-            <button key={d} role="tab" aria-selected={d === sel} className={`wd ${d === sel ? 'sel' : ''} ${d === today() ? 'today' : ''}`} data-day={d} onClick={() => go(d)}>
-              <small>{WEEK[i]}</small>
-              <b>{t.getDate()}</b>
-              <em>{n ? `${n} 条` : (dueDay[d] ? '到期' : '—')}</em>
-            </button>
-          );
-        })}
-      </div>
+      {open ? (
+        <div className="monthgrid" data-monthgrid>
+          <div className="mg-week">{WEEK.map(w => <span key={w}>{w.slice(1)}</span>)}</div>
+          <div className="mg-days">
+            {Array.from({ length: lead }, (_, i) => <span key={`b${i}`} />)}
+            {Array.from({ length: dim }, (_, i) => {
+              const d = ymd(y0, m0, i + 1), list = byDay[d] || [], kinds = [...new Set(list.map(r => r.kind))];
+              return (
+                <button key={d} className={`mg ${d === sel ? 'sel' : ''} ${d === today() ? 'today' : ''}`} data-day={d} onClick={() => { go(d); setOpen(false); }}>
+                  <b>{i + 1}</b>
+                  <em>{kinds.map(k => <u key={k} className={`dot ${k}`} />)}{dueDay[d] && !list.length && <u className="dot due" />}</em>
+                </button>
+              );
+            })}
+          </div>
+          <div className="legend"><i className="dot weight" />体重 <i className="dot vaccine" />疫苗 <i className="dot deworm" />驱虫 <i className="dot milestone" />瞬间 <i className="dot due" />到期日</div>
+        </div>
+      ) : (
+        <div className="weekstrip" role="tablist">
+          {days.map((d, i) => {
+            const n = (byDay[d] || []).length, t = parse(d);
+            return (
+              <button key={d} role="tab" aria-selected={d === sel} className={`wd ${d === sel ? 'sel' : ''} ${d === today() ? 'today' : ''}`} data-day={d} onClick={() => go(d)}>
+                <small>{WEEK[i]}</small>
+                <b>{t.getDate()}</b>
+                <em>{n ? `${n} 条` : (dueDay[d] ? '到期' : '—')}</em>
+              </button>
+            );
+          })}
+        </div>
+  
+      )}
 
       <div className="stats stats--mb">
         <div className="sd-stat"><strong>{streak(s, pet.id)}</strong><span>连续打卡 天</span></div>

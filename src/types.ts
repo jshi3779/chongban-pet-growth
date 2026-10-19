@@ -26,7 +26,6 @@ export interface CalState { y: number; m: number; sel: string | null }
 export interface AppState {
   cur: string;
   tab: Tab;
-  htab: 'timeline' | 'profile';
   filter: 'all' | Kind;
   seg: 'friends' | 'share';
   cal: CalState;

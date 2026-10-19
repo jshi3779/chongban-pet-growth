@@ -37,11 +37,3 @@ export function Chart() {
   );
 }
 
-export function Spark({ pid }: { pid: string }) {
-  const { s } = useApp();
-  const w = recsOf(s, pid, 'weight').slice().reverse().slice(-8);
-  if (w.length < 2) return null;
-  const vs = w.map(x => x.value as number), lo = Math.min(...vs), hi = Math.max(...vs);
-  const pts = w.map((x, i) => `${((i / (w.length - 1)) * 100).toFixed(1)},${(18 - (hi - lo ? ((x.value as number) - lo) / (hi - lo) : 0.5) * 16).toFixed(1)}`).join(' ');
-  return <svg className="spark" viewBox="0 0 100 20" preserveAspectRatio="none"><polyline points={pts} className="c-line c-spark" /></svg>;
-}

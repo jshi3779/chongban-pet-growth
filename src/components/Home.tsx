@@ -1,19 +1,13 @@
 import { useApp } from '../ctx';
 import { EMOJI, KIND, age, recsOf, reminders } from '../utils';
-import type { Kind } from '../types';
 import { Chart } from './Chart';
 import { DueTag, Photo, RecRow } from './Common';
-import { Overview } from './Overview';
-
-const QUICK: Kind[] = ['weight', 'vaccine', 'deworm', 'milestone'];
 
 export function Home() {
-  const { s, pet, patch, openRecord, openPet, del, soon } = useApp();
-  const tab = s.htab;
+  const { s, pet, patch, openRecord, openPet, soon } = useApp();
   const w = recsOf(s, pet.id, 'weight');
-  const L = recsOf(s, pet.id);
   const rem = reminders(s, pet.id);
-  const goCommunity = () => { patch({ tab: 'community' }); scrollTo(0, 0); };
+  const goCommunity = () => { patch({ tab: 'community' }); document.querySelector('.app')?.scrollTo(0, 0); };
   return (
     <>
       <section className="pethead">
@@ -31,34 +25,6 @@ export function Home() {
           <span>{pet.birthday ? age(pet.birthday) : '年龄未填'}</span>
         </div>
       </section>
-      <div className="tabs2">
-        <button className={tab === 'timeline' ? 'on' : ''} data-htab="timeline" onClick={() => patch({ htab: 'timeline' })}>时间线</button>
-        <button className={tab === 'profile' ? 'on' : ''} data-htab="profile" onClick={() => patch({ htab: 'profile' })}>档案资料</button>
-      </div>
-
-      {tab === 'timeline' ? (
-        <>
-          <div className="quick quick--mb">
-            {QUICK.map(k => <button key={k} data-add={k} onClick={() => openRecord(k)}><i>{KIND[k].e}</i>{k === 'milestone' ? '瞬间' : KIND[k].n}</button>)}
-          </div>
-          {L.length ? L.map(r => {
-            const k = KIND[r.kind];
-            return (
-              <article key={r.id} className={`tcard k-${r.kind}`}>
-                <span className="tcard__ic">{k.e}</span>
-                <div className="tcard__bd">
-                  <div className="tcard__top"><b>{k.n}</b><small>{r.date}</small></div>
-                  <p>{r.kind === 'weight' ? `体重 ${r.value} kg` : r.name}</p>
-                  {r.note && <p className="note">{r.note}</p>}
-                  {r.next && <DueTag next={r.next} />}
-                  <div className="tcard__foot">更新于 我 <button className="x" data-del={r.id} onClick={() => del(r.id)}>删除</button></div>
-                </div>
-              </article>
-            );
-          }) : <div className="sd-card card empty">还没有记录，点上方按钮开始吧</div>}
-        </>
-      ) : (
-        <>
           <div className="sd-card card">
             <div className="stats">
               <div className="sd-stat"><strong>{w[0] ? w[0].value : '-'}</strong><span>当前体重 kg</span></div>
@@ -101,10 +67,6 @@ export function Home() {
             {[...recsOf(s, pet.id, 'vaccine'), ...recsOf(s, pet.id, 'deworm')].sort((a, b) => b.date.localeCompare(a.date)).map(r => <RecRow key={r.id} r={r} />)}
             {!recsOf(s, pet.id, 'vaccine').length && !recsOf(s, pet.id, 'deworm').length && <div className="empty">还没有记录</div>}
           </div>
-          <div className="sec">全部宠物总览</div>
-          <Overview />
-        </>
-      )}
     </>
   );
 }

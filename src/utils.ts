@@ -29,7 +29,7 @@ export function calInit() { const n = new Date(); return { y: n.getFullYear(), m
 export function seed(): AppState {
   const d = (n: number) => shift(-n), f = (n: number) => shift(n);
   return {
-    cur: 'p1', tab: 'home', htab: 'timeline', filter: 'all', seg: 'friends', cal: calInit(),
+    cur: 'p1', tab: 'home', filter: 'all', seg: 'friends', cal: calInit(),
     pets: [{ id: 'p1', name: '年糕', type: '猫', breed: '英短蓝猫', gender: '♂', birthday: d(420) }],
     records: [
       { id: 1, petId: 'p1', kind: 'milestone', date: d(420), name: '来到这个世界', note: '出生啦' },
@@ -52,7 +52,7 @@ export function load(): AppState {
     const s = JSON.parse(localStorage.getItem(KEY) || 'null');
     if (s && Array.isArray(s.pets) && s.pets.length) {
       const base = seed();
-      return { ...base, ...s, cal: s.cal && s.cal.y ? s.cal : base.cal, htab: s.htab || 'timeline', seg: s.seg || 'friends',
+      return { ...base, ...s, cal: s.cal && s.cal.y ? s.cal : base.cal, seg: s.seg || 'friends',
         tab: ['home', 'calendar', 'timeline', 'community'].includes(s.tab) ? s.tab : 'home' };
     }
   } catch { /* ignore */ }

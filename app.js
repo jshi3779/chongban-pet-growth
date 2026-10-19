@@ -127,7 +127,7 @@ function community(){
   return`<div class="filters"><button class="chip ${seg==='friends'?'on':''}" data-seg="friends">📍 附近宠友</button><button class="chip ${seg==='share'?'on':''}" data-seg="share">💬 养宠广场</button></div>`+V[seg]();
 }
 
-const V={calendar,overview,community,
+const V={calendar,community,
  home(){
   const p=pet();
   const w=recs('weight'),rem=reminders();
@@ -139,7 +139,8 @@ const V={calendar,overview,community,
    <button class="soon" data-tab="community"><i>📍</i>附近宠友</button><button class="soon" data-tab="community"><i>📸</i>晒日常</button><button class="soon" data-soon="就医记录"><i>🏥</i>就医</button><button class="soon" data-soon="宠物商城"><i>🛒</i>用品</button></div></div>
   <div class="card"><h3>健康提醒<small>疫苗 / 驱虫到期</small></h3>${rem.length?rem.slice(0,4).map(({r,left})=>`<div class="row"><div class="grow"><b>${KIND[r.kind].e} ${esc(r.name)}</b><br><small>下次：${r.next}</small></div>${left<0?`<span class="tag red">逾期${-left}天</span>`:left<=14?`<span class="tag y">${left}天后</span>`:`<span class="tag green">${left}天后</span>`}</div>`).join(''):'<div class="empty">暂无待办，健康状态良好 ✅</div>'}</div>
   <div class="card"><h3>体重曲线<small><button class="x" data-add="weight">＋记录</button></small></h3>${chart()}</div>
-  <div class="card"><h3>疫苗 &amp; 驱虫</h3>${[...recs('vaccine'),...recs('deworm')].sort((a,b)=>b.date.localeCompare(a.date)).map(recRow).join('')||'<div class="empty">还没有记录</div>'}</div>`;
+  <div class="card"><h3>疫苗 &amp; 驱虫</h3>${[...recs('vaccine'),...recs('deworm')].sort((a,b)=>b.date.localeCompare(a.date)).map(recRow).join('')||'<div class="empty">还没有记录</div>'}</div>
+  <div class="sec">全部宠物总览</div>${overview()}`;
  },
  timeline(){
   const p=pet();const L=recs().filter(r=>S.filter==='all'||r.kind===S.filter);
@@ -153,6 +154,7 @@ const V={calendar,overview,community,
 };
 
 function render(){
+  if(!V[S.tab])S.tab='home';
   $('#view').innerHTML=V[S.tab]();
   document.querySelectorAll('.tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
   save();

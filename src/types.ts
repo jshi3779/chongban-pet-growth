@@ -21,13 +21,30 @@ export interface PetRecord {
   note?: string;
 }
 
+export interface Post {
+  id: number;
+  author: string;
+  pet: string;
+  title: string;
+  body: string;
+  img?: string;
+  shape: 'a' | 'b' | 'c';
+  likes: number;
+  liked: boolean;
+  /** 距离（公里），有值才会出现在「附近宠友」 */
+  km?: number;
+  place?: string;
+  mine?: boolean;
+}
+
 export interface CalState { y: number; m: number; sel: string | null }
 
 export interface AppState {
   cur: string;
   tab: Tab;
   filter: 'all' | Kind;
-  seg: 'friends' | 'share';
+  comm: 'recommend' | 'nearby';
+  posts: Post[];
   cal: CalState;
   pets: Pet[];
   records: PetRecord[];

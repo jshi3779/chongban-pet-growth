@@ -1,0 +1,35 @@
+/* ===== 社区：双列瀑布流帖子 + 顶部分类 + 右下角发布按钮 =====
+   ⚠️ 未覆盖样式：瀑布流图片比例（用 aspect-ratio 数值，无单位），兜底 Token --radius-lg */
+.commnav{position:sticky;top:0;z-index:var(--z-dropdown);display:flex;justify-content:center;gap:var(--space-3xl);margin:0 calc(var(--space-xl)*-1) var(--space-md);padding:0 var(--space-xl);background:var(--color-bg-page)}
+.commnav button{height:var(--space-touch);font-size:var(--font-size-h3);font-weight:var(--font-weight-medium);color:var(--color-text-tertiary);border-bottom:var(--space-xs) solid transparent;border-radius:0}
+.commnav button.on{color:var(--color-text-primary);font-weight:var(--font-weight-bold);border-bottom-color:var(--color-primary-500)}
+.commhint{margin:0 0 var(--space-md);color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.feed{display:flex;gap:var(--space-sm);align-items:flex-start}
+.feed__col{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--space-sm)}
+.post{background:var(--color-bg-card);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative}
+.post__open{display:block;width:100%;text-align:left}
+.post__img{display:block;width:100%;object-fit:cover}
+.post__img--a{aspect-ratio:3/4}.post__img--b{aspect-ratio:1/1}.post__img--c{aspect-ratio:4/5}
+.post__txt{display:flex;align-items:center;padding:var(--space-lg);background:var(--color-primary-50);color:var(--color-text-secondary);font-size:var(--font-size-body)}
+.post__txt p{margin:0;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line}
+.post h3{margin:var(--space-sm) var(--space-md) 0;font-size:var(--font-size-body);font-weight:var(--font-weight-medium);line-height:var(--line-height-body);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post__foot{display:flex;justify-content:space-between;align-items:center;padding:var(--space-xs) var(--space-md) var(--space-md);color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.post__by{display:flex;align-items:center;gap:var(--space-xs);min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.post__by i{font-style:normal;width:var(--space-xl);height:var(--space-xl);border-radius:var(--radius-full);background:var(--color-primary-50);display:grid;place-items:center;flex:none}
+.post__like{color:var(--color-text-tertiary);font-size:var(--font-size-caption);min-height:var(--space-touch);padding:0 var(--space-xs);margin:calc(var(--space-sm)*-1) 0}
+.post__like.on{color:var(--color-primary-500)}
+.post__km{position:absolute;top:var(--space-sm);left:var(--space-sm);background:var(--color-bg-mask);color:var(--color-bg-card);font-size:var(--font-size-caption);padding:0 var(--space-sm);border-radius:var(--radius-full)}
+.fab{position:fixed;right:var(--space-xl);bottom:calc(var(--unit)*2.2);width:var(--space-touch-lg);height:var(--space-touch-lg);border-radius:var(--radius-full);background:var(--color-primary-500);color:var(--color-bg-card);font-size:var(--font-size-h1);line-height:1;display:grid;place-items:center;box-shadow:var(--shadow-lg);z-index:var(--z-sticky)}
+/* 发帖 / 详情弹窗 */
+.imgpick{border:0;padding:0;margin:0 0 var(--space-md);display:flex;gap:var(--space-sm);flex-wrap:wrap}
+.imgpick legend{color:var(--color-text-secondary);font-size:var(--font-size-caption);margin-bottom:var(--space-xs);padding:0}
+.panel .imgpick__o{margin:0;position:relative}
+.imgpick__o input{position:absolute;opacity:0;width:100%;height:100%;margin:0}
+.imgpick__o img,.imgpick__o span{display:grid;place-items:center;width:calc(var(--unit)*1.2);height:calc(var(--unit)*1.2);border-radius:var(--radius-md);object-fit:cover;background:var(--color-bg-page);font-size:var(--font-size-caption);color:var(--color-text-tertiary);border:var(--space-xs) solid transparent}
+.imgpick__o input:checked+img,.imgpick__o input:checked+span{border-color:var(--color-primary-500)}
+.imgpick__o input:focus-visible+img,.imgpick__o input:focus-visible+span{outline:medium solid var(--color-primary-500)}
+.panel label.check{display:flex;align-items:center;gap:var(--space-sm)}
+.panel label.check input{width:auto;margin:0}
+.detail__img{width:100%;max-height:calc(var(--unit)*5);object-fit:cover;border-radius:var(--radius-lg);margin-bottom:var(--space-md)}
+.detail__body{white-space:pre-line;color:var(--color-text-secondary);margin:0 0 var(--space-md)}
+.detail__meta{display:flex;justify-content:space-between;color:var(--color-text-tertiary);font-size:var(--font-size-caption);margin-bottom:var(--space-md)}

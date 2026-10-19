@@ -1,4 +1,4 @@
-import type { AppState, Kind, Pet, PetRecord } from './types';
+import type { AppState, Kind, Pet, PetRecord, Post } from './types';
 
 export const KEY = 'petgrowth.v1';
 export const KIND: Record<Kind, { n: string; e: string }> = {
@@ -26,10 +26,21 @@ export function age(b: string) {
 
 export function calInit() { const n = new Date(); return { y: n.getFullYear(), m: n.getMonth(), sel: today() as string | null }; }
 
+export function seedPosts(): Post[] {
+  return [
+    { id: 101, author: '橘子妈', pet: '小橘', title: '第一次带猫猫去体检，全程没哭！', body: '提前一周开始适应航空箱，到医院还乖乖吃了零食。记录一下体检的流程和花费，给新手铲屎官参考。', img: 'cat.jpg', shape: 'a', likes: 238, liked: false, km: 0.8, place: '徐汇' },
+    { id: 102, author: 'Coco 的爸爸', pet: 'Coco', title: '周末遛狗路线分享', body: '滨江大道从日晖桥走到龙华，全程草坪，狗狗可以放绳（记得带牵引绳以防万一）。', img: 'dog.jpg', shape: 'b', likes: 156, liked: true, km: 1.5, place: '徐汇' },
+    { id: 103, author: '布丁家', pet: '布丁', title: '换粮过渡期别心急', body: '7 天过渡法：每天多换 1/7，拉稀就退回上一步。我家布丁这次一次成功。', shape: 'c', likes: 89, liked: false, km: 2.3, place: '长宁' },
+    { id: 104, author: '猫奴小王', pet: '大福', title: '午后的小猫咪', body: '晒太阳的时候最乖。', img: 'cat-memory.jpg', shape: 'c', likes: 342, liked: false },
+    { id: 105, author: '年糕的铲屎官', pet: '年糕', title: '新手养猫避坑指南', body: '1. 猫砂盆数量 = 猫数 + 1\n2. 水碗要远离食盆\n3. 疫苗和驱虫按时间表走，在「日历」里打卡就不会忘。', shape: 'a', likes: 521, liked: false },
+    { id: 106, author: 'Momo', pet: '摩卡', title: '狗狗社交小课堂', body: '见到陌生狗先侧身，不要正面对视，尾巴放松才算友好。', img: 'dog.jpg', shape: 'a', likes: 77, liked: false, km: 3.1, place: '静安' },
+  ];
+}
+
 export function seed(): AppState {
   const d = (n: number) => shift(-n), f = (n: number) => shift(n);
   return {
-    cur: 'p1', tab: 'home', filter: 'all', seg: 'friends', cal: calInit(),
+    cur: 'p1', tab: 'home', filter: 'all', comm: 'recommend', posts: seedPosts(), cal: calInit(),
     pets: [{ id: 'p1', name: '年糕', type: '猫', breed: '英短蓝猫', gender: '♂', birthday: d(420) }],
     records: [
       { id: 1, petId: 'p1', kind: 'milestone', date: d(420), name: '来到这个世界', note: '出生啦' },
@@ -52,7 +63,7 @@ export function load(): AppState {
     const s = JSON.parse(localStorage.getItem(KEY) || 'null');
     if (s && Array.isArray(s.pets) && s.pets.length) {
       const base = seed();
-      return { ...base, ...s, cal: s.cal && s.cal.y ? s.cal : base.cal, seg: s.seg || 'friends',
+      return { ...base, ...s, cal: s.cal && s.cal.y ? s.cal : base.cal, comm: s.comm || 'recommend', posts: Array.isArray(s.posts) ? s.posts : base.posts,
         tab: ['home', 'calendar', 'timeline', 'community'].includes(s.tab) ? s.tab : 'home' };
     }
   } catch { /* ignore */ }

@@ -1,8 +1,9 @@
 import type { FormEvent } from 'react';
+import { useApp } from '../ctx';
 import { EMOJI, KIND, today } from '../utils';
 import type { Kind } from '../types';
 
-export type SheetState = { type: 'record'; kind: Kind; date: string } | { type: 'pet' } | null;
+export type SheetState = { type: 'record'; kind: Kind; date: string } | { type: 'pet' } | { type: 'post' } | { type: 'detail'; id: number } | null;
 export type FormData2 = Record<string, string>;
 
 const LABEL: Record<Kind, [string, string]> = {
@@ -13,6 +14,7 @@ const LABEL: Record<Kind, [string, string]> = {
 };
 
 export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose: () => void; onSubmit: (d: FormData2) => void }) {
+  const { s, like } = useApp();
   if (!sheet) return null;
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +29,35 @@ export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose
   return (
     <div id="sheet" className="sheet">
       <div className="mask" onClick={onClose} />
-      {sheet.type === 'record' ? (
+      {sheet.type === 'detail' ? (() => {
+        const p = s.posts.find(x => x.id === sheet.id);
+        if (!p) return null;
+        return (
+          <article className="panel detail" id="form">
+            {p.img && <img className="detail__img" src={`${import.meta.env.BASE_URL}assets/${p.img}`} alt={p.title} />}
+            <h4>{p.title}</h4>
+            <p className="detail__body">{p.body}</p>
+            <div className="detail__meta"><span>{p.author} · {p.pet}</span>{p.km != null && <span>📍 {p.place} · {p.km} km</span>}</div>
+            <div className="act">
+              <button type="button" className="sd-btn sd-btn--default" data-close onClick={onClose}>关闭</button>
+              <button type="button" className={`sd-btn ${p.liked ? 'sd-btn--primary' : 'sd-btn--default'}`} data-like={p.id} onClick={() => like(p.id)}>{p.liked ? '♥' : '♡'} {p.likes}</button>
+            </div>
+          </article>
+        );
+      })() : sheet.type === 'post' ? (
+        <form className="panel" id="form" onSubmit={submit}>
+          <h4>发布帖子</h4>
+          <label>标题<input className="sd-input" name="title" required maxLength={30} placeholder="分享一件和宠物有关的事" /></label>
+          <label>正文<textarea className="sd-input" name="body" rows={4} maxLength={300} placeholder="写点什么吧" /></label>
+          <fieldset className="imgpick"><legend>配图（示例照片，上传功能待开发）</legend>
+            {[['', '无'], ['cat.jpg', '猫'], ['dog.jpg', '狗'], ['cat-memory.jpg', '午后']].map(([v, n], i) => (
+              <label key={v} className="imgpick__o"><input type="radio" name="img" value={v} defaultChecked={i === 0} />{v ? <img src={`${import.meta.env.BASE_URL}assets/${v}`} alt={n} /> : <span>无</span>}</label>
+            ))}
+          </fieldset>
+          <label className="check"><input type="checkbox" name="nearby" />发布到「附近宠友」（显示我的位置）</label>
+          {acts}
+        </form>
+      ) : sheet.type === 'record' ? (
         <form className="panel" id="form" onSubmit={submit} key={`${sheet.kind}${sheet.date}`}>
           <h4>{KIND[sheet.kind].e} 记录{KIND[sheet.kind].n}</h4>
           <label>日期<input className="sd-input" name="date" type="date" defaultValue={sheet.date} max={today()} required /></label>

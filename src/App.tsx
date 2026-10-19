@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AppCtx, type Api } from './ctx';
-import type { AppState, Kind, Tab } from './types';
+import type { AppState, Kind, Post, Tab } from './types';
 import { curPet, load, persist, today } from './utils';
 import { Home } from './components/Home';
 import { CalendarView } from './components/CalendarView';
@@ -35,6 +35,9 @@ export default function App() {
     openPet: () => setSheet({ type: 'pet' }),
     del: id => { if (confirm('确定删除这条记录？')) setS(o => ({ ...o, records: o.records.filter(r => r.id !== id) })); },
     soon: n => say(`「${n}」即将上线`),
+    openPost: () => setSheet({ type: 'post' }),
+    openDetail: (id: number) => setSheet({ type: 'detail', id }),
+    like: (id: number) => setS(o => ({ ...o, posts: o.posts.map(p => (p.id === id ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) } : p)) })),
   }), [s, pet, say]);
 
   const submit = (d: FormData2) => {
@@ -49,7 +52,11 @@ export default function App() {
         return { ...o, records: [...o.records, r] };
       });
       say('已保存');
-    } else {
+    } else if (sheet.type === 'post') {
+      const post: Post = { id: Date.now(), author: '我', pet: curPet(s).name, title: d.title, body: d.body || '', img: d.img || undefined, shape: 'a', likes: 0, liked: false, mine: true, ...(d.nearby ? { km: 0.1, place: '我的位置' } : {}) };
+      setS(o => ({ ...o, posts: [post, ...o.posts], comm: d.nearby ? 'nearby' : o.comm }));
+      say('已发布');
+    } else if (sheet.type === 'pet') {
       const p = { id: `p${Date.now()}`, name: d.name, type: d.type, breed: d.breed, gender: d.gender, birthday: d.birthday };
       setS(o => ({ ...o, pets: [...o.pets, p], cur: p.id }));
       say('已添加');

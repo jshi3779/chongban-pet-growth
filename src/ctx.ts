@@ -9,6 +9,9 @@ export interface Api {
   openPet: () => void;
   del: (id: number) => void;
   soon: (name: string) => void;
+  openPost: () => void;
+  openDetail: (id: number) => void;
+  like: (id: number) => void;
 }
 
 export const AppCtx = createContext<Api>(null as unknown as Api);

@@ -1,0 +1,37 @@
+{
+  "motion.duration-base": {
+    "value": 300,
+    "type": "duration",
+    "group": "动效",
+    "desc": "常规过渡延长至 300ms，贴合活泼年轻的消费级动效节奏（覆盖 base 的 250）",
+    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "引导页入场、轨迹动画的轻盈观感" }
+  },
+  "z.dropdown": {
+    "value": 1000,
+    "type": "z-index",
+    "group": "层级",
+    "desc": "下拉/浮层",
+    "source": { "type": "ai-default", "reference": "", "element": "移动端惯例层级" }
+  },
+  "z.sticky": {
+    "value": 1010,
+    "type": "z-index",
+    "group": "层级",
+    "desc": "吸顶导航、悬浮状态胶囊",
+    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 地图上方悬浮的 Tilda 状态胶囊" }
+  },
+  "z.modal": {
+    "value": 1050,
+    "type": "z-index",
+    "group": "层级",
+    "desc": "模态弹窗",
+    "source": { "type": "ai-default", "reference": "", "element": "移动端惯例层级" }
+  },
+  "z.toast": {
+    "value": 1080,
+    "type": "z-index",
+    "group": "层级",
+    "desc": "轻提示 Toast",
+    "source": { "type": "ai-default", "reference": "", "element": "移动端惯例层级" }
+  }
+}

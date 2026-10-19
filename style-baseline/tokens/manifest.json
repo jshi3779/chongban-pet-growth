@@ -1,0 +1,16 @@
+{
+  "project-type": "frontend-only",
+  "version": "1.0.0",
+  "updated": "2026-10-19",
+  "themes": {
+    "frontend": {
+      "base": "frontend/frontend-base.json",
+      "subtypes": {
+        "app": "frontend/app.json"
+      }
+    }
+  },
+  "modules": [
+    { "module-id": "m-pet-home", "theme": "frontend", "subtype": "app" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "space.touch": {
+    "value": 44,
+    "type": "dimension",
+    "group": "间距",
+    "desc": "触控热区最小高度 44（iOS HIG 标准，4 的倍数），Tab、列表项、图标按钮",
+    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 底部 Tab 与圆形图标钮热区" }
+  },
+  "space.touch-lg": {
+    "value": 48,
+    "type": "dimension",
+    "group": "间距",
+    "desc": "大触控高度 48：主按钮、胶囊按钮（截图主按钮高约 48）",
+    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 Start Tracking 主按钮高度" }
+  },
+  "font.family-base": {
+    "value": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "type": "font",
+    "group": "字体",
+    "desc": "APP 端字体族：iOS 系统字体优先（与 base 一致，保留此层便于后续 iOS/Android 分支）",
+    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "全图字形特征（SF Pro 系）" }
+  }
+}

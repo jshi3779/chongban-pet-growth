@@ -129,12 +129,20 @@ function community(){
 
 const V={calendar,community,
  home(){
-  const p=pet();
-  const w=recs('weight'),rem=reminders();
-  return petSwitch()+`
-  <div class="hero"><div class="hero-label"><span>MY LITTLE COMPANION</span><span aria-hidden="true">♡</span></div>${photo("hero-photo",p.type==='狗'?'dog.jpg':'cat.jpg','宠物档案封面示例照片')}<span class="hero-caption">一起长大 · 一起探索</span></div>
-  <div class="sd-card card profile"><div class="eyebrow">HELLO, MY FRIEND</div><h2>${esc(p.name)} <span class="gender">${p.gender||""}</span></h2><div class="meta"><span>${esc(p.type)} · ${esc(p.breed||"未填品种")}</span><span>🎂 ${p.birthday||"-"} · ${p.birthday?age(p.birthday):""}</span></div>
-   <div class="stats"><div class="sd-stat"><strong>${w[0]?w[0].value:"-"}</strong><span>当前体重 kg</span></div><div class="sd-stat"><strong>${recs("vaccine").length}</strong><span>疫苗记录</span></div><div class="sd-stat"><strong>${recs("deworm").length}</strong><span>驱虫记录</span></div></div></div>
+  const p=pet(),w=recs('weight'),rem=reminders(),tab=S.htab||'timeline';
+  const others=S.pets.filter(q=>q.id!==p.id).map(q=>`<button class="face" data-pet="${q.id}" aria-label="切换到${esc(q.name)}">${EMOJI[q.type]||'🐾'}</button>`).join('');
+  const head=`<section class="pethead"><div class="pethead__row"><span class="bigface"><img src="assets/${p.type==='狗'?'dog.jpg':'cat.jpg'}" alt="${esc(p.name)}的示例照片"></span>${others}<button class="face add" data-act="addpet" aria-label="添加宠物">＋</button></div>
+   <h2>${esc(p.name)}</h2><div class="meta"><span>${esc(p.breed||p.type)}</span><span>${p.gender==='♀'?'女孩':'男孩'}</span><span>${p.birthday?age(p.birthday):'年龄未填'}</span></div></section>
+   <div class="tabs2"><button class="${tab==='timeline'?'on':''}" data-htab="timeline">时间线</button><button class="${tab==='profile'?'on':''}" data-htab="profile">档案资料</button></div>`;
+  if(tab==='timeline'){
+    const L=recs();
+    return head+`<div class="quick quick--mb"><button data-add="weight"><i>⚖️</i>体重</button><button data-add="vaccine"><i>💉</i>疫苗</button><button data-add="deworm"><i>🐛</i>驱虫</button><button data-add="milestone"><i>🎉</i>瞬间</button></div>`+
+    (L.length?L.map(r=>{const k=KIND[r.kind];const main=r.kind==='weight'?`体重 ${r.value} kg`:esc(r.name);let tag='';if(r.next){const l=dayDiff(r.next,today());tag=l<0?`<span class="sd-tag sd-tag--error">已逾期${-l}天</span>`:l<=14?`<span class="sd-tag">${l}天后到期</span>`:`<span class="sd-tag sd-tag--success">下次 ${r.next}</span>`}
+      return`<article class="tcard k-${r.kind}"><span class="tcard__ic">${k.e}</span><div class="tcard__bd"><div class="tcard__top"><b>${k.n}</b><small>${r.date}</small></div><p>${main}</p>${r.note?`<p class="note">${esc(r.note)}</p>`:''}${tag}<div class="tcard__foot">更新于 我 <button class="x" data-del="${r.id}">删除</button></div></div></article>`}).join(''):'<div class="sd-card card empty">还没有记录，点上方按钮开始吧</div>');
+  }
+  return head+`
+  <div class="sd-card card"><div class="stats"><div class="sd-stat"><strong>${w[0]?w[0].value:"-"}</strong><span>当前体重 kg</span></div><div class="sd-stat"><strong>${recs("vaccine").length}</strong><span>疫苗记录</span></div><div class="sd-stat"><strong>${recs("deworm").length}</strong><span>驱虫记录</span></div></div>
+   <div class="meta meta--mt"><span>${esc(p.type)} · ${esc(p.breed||"未填品种")}</span><span>🎂 ${p.birthday||"-"}</span></div></div>
   <div class="bento">
    <button class="p" data-add="weight"><i>⚖️</i>记体重</button><button data-add="vaccine"><i>💉</i>打疫苗</button><button data-add="deworm"><i>🐛</i>驱虫</button><button data-add="milestone"><i>🎉</i>成长瞬间</button>
    <button class="soon" data-tab="community"><i>📍</i>附近宠友</button><button class="soon" data-tab="community"><i>📸</i>晒日常</button><button class="soon" data-soon="就医记录"><i>🏥</i>就医</button><button class="soon" data-soon="宠物商城"><i>🛒</i>用品</button></div>
@@ -191,6 +199,7 @@ document.addEventListener('click',e=>{
   const D=t.dataset;
   if(D.calnav){const c=S.cal||(S.cal=calInit());let m=c.m+ +D.calnav,y=c.y;if(m<0){m=11;y--}if(m>11){m=0;y++}c.y=y;c.m=m;c.sel=null;render()}
   else if(D.day){S.cal.sel=D.day;render()}
+  else if(D.htab){S.htab=D.htab;render()}
   else if(D.seg){S.seg=D.seg;render()}
   else if(D.tab){S.tab=D.tab;render();scrollTo(0,0)}
   else if(D.add)addRecord(D.add,D.date);

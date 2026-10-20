@@ -73,3 +73,20 @@ main{padding-left:var(--space-2xl);padding-right:var(--space-2xl)}
 .m-hi{fill:var(--color-bg-card);opacity:.55}
 .m-stop1{stop-color:var(--color-bg-card)}
 .m-stop2{stop-color:var(--color-primary-100)}
+/* ===== 居中悬浮弹窗（取代底部抽屉）===== */
+.sheet{align-items:center;padding:var(--space-xl)}
+.panel{width:100%;max-width:none;border-radius:var(--radius-xl);padding:var(--space-xl);max-height:calc(100% - var(--space-xl)*2);box-shadow:var(--shadow-xl);animation:pop var(--motion-duration-base) var(--motion-ease-standard)}
+@keyframes pop{from{opacity:0;transform:scale(.94)}}
+.mask{animation:fadein var(--motion-duration-fast) var(--motion-ease-standard)}
+/* 添加事件：选择类型 */
+.pick__date{margin:calc(var(--space-sm)*-1) 0 var(--space-lg);color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.pick__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);margin-bottom:var(--space-lg)}
+.pick__opt{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-xs);padding:var(--space-lg);border-radius:var(--radius-lg);background:var(--color-bg-page);box-shadow:var(--clay-sm);text-align:left}
+.pick__opt i{font-style:normal;font-size:var(--font-size-h1);line-height:1}
+.pick__opt b{font-size:var(--font-size-h3);font-weight:var(--font-weight-bold)}
+.pick__opt small{color:var(--color-text-tertiary);font-size:var(--font-size-caption)}
+.pick__opt:hover,.pick__opt:focus-visible{background:var(--color-primary-50)}
+.pick__cancel{width:100%;height:var(--space-touch-lg)}
+/* 示例日程标记 */
+.demotag{display:inline-flex;align-items:center;height:var(--space-xl);padding:0 var(--space-sm);border-radius:var(--radius-full);background:var(--stone);color:var(--color-text-tertiary);font-size:var(--font-size-caption);font-weight:var(--font-weight-medium)}
+.demotag--lg{margin-left:var(--space-sm);vertical-align:middle}

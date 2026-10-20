@@ -3,8 +3,10 @@ import { useApp } from '../ctx';
 import { EMOJI, KIND, today } from '../utils';
 import type { Kind } from '../types';
 
-export type SheetState = { type: 'record'; kind: Kind; date: string } | { type: 'pet' } | { type: 'post' } | { type: 'detail'; id: number } | null;
+export type SheetState = { type: 'record'; kind: Kind; date: string } | { type: 'pet' } | { type: 'post' } | { type: 'pick'; date: string } | { type: 'detail'; id: number } | null;
 export type FormData2 = Record<string, string>;
+
+const PICK: [Kind, string][] = [['vaccine', '接种记录与下次提醒'], ['weight', '记录今天的体重'], ['deworm', '体内 / 体外驱虫'], ['milestone', '成长中的小瞬间']];
 
 const LABEL: Record<Kind, [string, string]> = {
   weight: ['', ''],
@@ -14,7 +16,7 @@ const LABEL: Record<Kind, [string, string]> = {
 };
 
 export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose: () => void; onSubmit: (d: FormData2) => void }) {
-  const { s, like } = useApp();
+  const { s, like, openRecord } = useApp();
   if (!sheet) return null;
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +31,20 @@ export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose
   return (
     <div id="sheet" className="sheet">
       <div className="mask" onClick={onClose} />
-      {sheet.type === 'detail' ? (() => {
+      {sheet.type === 'pick' ? (
+        <div className="panel pick" id="form" role="dialog" aria-label="添加事件">
+          <h4>添加事件</h4>
+          <p className="pick__date">日期：{sheet.date}</p>
+          <div className="pick__grid">
+            {PICK.map(([k, hint]) => (
+              <button key={k} type="button" className="pick__opt" data-pick={k} onClick={() => openRecord(k, sheet.date)}>
+                <i>{KIND[k].e}</i><b>{KIND[k].n}</b><small>{hint}</small>
+              </button>
+            ))}
+          </div>
+          <button type="button" className="sd-btn sd-btn--default pick__cancel" data-close onClick={onClose}>取消</button>
+        </div>
+      ) : sheet.type === 'detail' ? (() => {
         const p = s.posts.find(x => x.id === sheet.id);
         if (!p) return null;
         return (

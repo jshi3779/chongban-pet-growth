@@ -35,6 +35,7 @@ export default function App() {
     openPet: () => setSheet({ type: 'pet' }),
     del: id => { if (confirm('确定删除这条记录？')) setS(o => ({ ...o, records: o.records.filter(r => r.id !== id) })); },
     soon: n => say(`「${n}」即将上线`),
+    openPick: (date: string) => setSheet({ type: 'pick', date }),
     openPost: () => setSheet({ type: 'post' }),
     openDetail: (id: number) => setSheet({ type: 'detail', id }),
     like: (id: number) => setS(o => ({ ...o, posts: o.posts.map(p => (p.id === id ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) } : p)) })),

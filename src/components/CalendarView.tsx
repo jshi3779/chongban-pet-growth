@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useApp } from '../ctx';
-import { KIND, calInit, dayDiff, recsOf, reminders, streak, today, ymd } from '../utils';
-import type { Kind, PetRecord } from '../types';
+import { KIND, calInit, dayDiff, recsOf, reminders, shift, streak, today, ymd } from '../utils';
+import type { AppState, Kind, PetRecord } from '../types';
 import { PetSwitch } from './Common';
 
 const KINDS: Kind[] = ['weight', 'vaccine', 'deworm', 'milestone'];
@@ -26,8 +26,23 @@ function Status({ r }: { r: PetRecord }) {
   return <span className="pill pill--done">已完成</span>;
 }
 
+/** 当前宠物还没有任何记录时，用几条示例日程展示样式（不写入存档） */
+function withDemo(s: AppState, pid: string): { st: AppState; demo: boolean } {
+  if (s.records.some(r => r.petId === pid)) return { st: s, demo: false };
+  const d = (n: number) => shift(n);
+  const demo: PetRecord[] = [
+    { id: -1, petId: pid, kind: 'weight', date: d(0), value: 4.2, note: '早餐前称重' },
+    { id: -2, petId: pid, kind: 'vaccine', date: d(0), name: '狂犬疫苗', note: '社区宠物医院', next: d(365) },
+    { id: -3, petId: pid, kind: 'deworm', date: d(-1), name: '体外驱虫', note: '滴剂', next: d(5) },
+    { id: -4, petId: pid, kind: 'milestone', date: d(-3), name: '第一次去公园', note: '追着蝴蝶跑了一圈' },
+    { id: -5, petId: pid, kind: 'vaccine', date: d(-40), name: '猫三联（第2针）', next: d(2) },
+  ];
+  return { st: { ...s, records: [...s.records, ...demo] }, demo: true };
+}
+
 export function CalendarView() {
-  const { s, pet, patch, openRecord, del } = useApp();
+  const { s: real, pet, patch, openPick, openRecord, del } = useApp();
+  const { st: s, demo } = withDemo(real, pet.id);
   const [open, setOpen] = useState(false);
   const c = s.cal || calInit();
   const sel = c.sel || today();
@@ -64,7 +79,7 @@ export function CalendarView() {
           </button>
           <button className="x" aria-label={open ? '下个月' : '下一周'} data-calnav="1" onClick={() => step(1)}>›</button>
         </div>
-        <button className="roundbtn" aria-label="在所选日期添加记录" onClick={() => openRecord('weight', future ? today() : sel)}>＋</button>
+        <button className="roundbtn" aria-label="在所选日期添加记录" onClick={() => openPick(future ? today() : sel)}>＋</button>
       </div>
 
       {open ? (
@@ -115,7 +130,7 @@ export function CalendarView() {
                 <span className="slotcard__ic">{KIND[r.kind].e}</span>
                 <div className="slotcard__tx"><b>{r.kind === 'weight' ? `体重 ${r.value} kg` : r.name}</b><small>{r.note || (r.next ? `下次 ${r.next}` : pet.name)}</small></div>
               </div>
-              <div className="slotcard__foot"><Status r={r} /><button className="x" data-del={r.id} onClick={() => del(r.id)}>删除</button></div>
+              <div className="slotcard__foot"><Status r={r} />{r.id > 0 ? <button className="x" data-del={r.id} onClick={() => del(r.id)}>删除</button> : <span className="demotag">示例</span>}</div>
             </article>
           </div>
         ))}
@@ -134,7 +149,7 @@ export function CalendarView() {
         {future && !sl.length && !due && <div className="empty">未来的日子，还不能打卡</div>}
       </section>
 
-      <div className="sec">打卡记录</div>
+      <div className="sec">打卡记录{demo && <span className="demotag demotag--lg">示例日程</span>}</div>
       {nearest && (
         <div className="upnext" data-upnext>
           <span className="upnext__ic">{KIND[nearest.r.kind].e}</span>

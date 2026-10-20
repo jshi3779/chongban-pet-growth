@@ -9,6 +9,7 @@ export interface Api {
   openPet: () => void;
   del: (id: number) => void;
   soon: (name: string) => void;
+  openPick: (date: string) => void;
   openPost: () => void;
   openDetail: (id: number) => void;
   like: (id: number) => void;

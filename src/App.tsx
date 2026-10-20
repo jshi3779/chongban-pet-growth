@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AppCtx, type Api } from './ctx';
 import type { AppState, Kind, Post, Tab } from './types';
-import { curPet, load, persist, today } from './utils';
+import { calInit, curPet, load, persist, today } from './utils';
 import { Home } from './components/Home';
 import { CalendarView } from './components/CalendarView';
 import { TimelineView } from './components/TimelineView';
@@ -65,7 +65,7 @@ export default function App() {
     setSheet(null);
   };
 
-  const go = (t: Tab) => { setS(o => ({ ...o, tab: t })); document.querySelector('.app')?.scrollTo(0, 0); };
+  const go = (t: Tab) => { setS(o => ({ ...o, tab: t, ...(t === 'calendar' ? { cal: calInit() } : {}) })); document.querySelector('.app')?.scrollTo(0, 0); };
   const View = { home: Home, calendar: CalendarView, timeline: TimelineView, community: Community }[s.tab];
 
   return (

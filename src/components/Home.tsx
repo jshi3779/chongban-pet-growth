@@ -1,5 +1,6 @@
 import { useApp } from '../ctx';
 import { EMOJI, KIND, age, recsOf, reminders } from '../utils';
+import { Mascot } from './Mascot';
 import { Chart } from './Chart';
 import { DueTag, Photo, RecRow } from './Common';
 
@@ -12,7 +13,7 @@ export function Home() {
     <>
       <section className="pethead">
         <div className="pethead__row">
-          <span className="bigface"><img src={`${import.meta.env.BASE_URL}assets/${pet.type === '狗' ? 'dog.jpg' : 'cat.jpg'}`} alt={`${pet.name}的示例照片`} /></span>
+          <span className="bigface"><Mascot type={pet.type} label={`${pet.name}的黏土形象`} /></span>
           {s.pets.filter(q => q.id !== pet.id).map(q => (
             <button key={q.id} className="face" data-pet={q.id} aria-label={`切换到${q.name}`} onClick={() => patch({ cur: q.id })}>{EMOJI[q.type] || '🐾'}</button>
           ))}

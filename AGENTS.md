@@ -37,6 +37,7 @@ npm run build            # 类型检查 + 构建
 - 当前存在两套风格基线：`style-baseline/theme.css`（原追踪蓝 `#3D7BFA`）与
   `ui-ux-pro-max-design-system.md`（扁平卡通橙 `#FF7A59`）。落地新页面时，
   默认以 `ui-ux-pro-max-design-system.md` 的扁平卡通为准，并将对应色值同步进 `theme.css` 变量。
-- 现状：`theme.css` 的主色色阶已切换为橙色（500 = `#FF7A59`，其余色阶由 500 推算）。
-  `ui-ux-pro-max-design-system.md` 原文未提供，字体、圆角、动效 Token 尚未与它对齐，待补文件后校对。
+- 现状（v1.2）：`theme.css` 已按 POMU 暖色黏土风重设：奶油白 `#FFF8EC`（页面）、杏橙 `#F6A15F`（选中/高亮）、深可可 `#39271F`（文字与主操作）、鼠尾草绿 `#8FB59B` 与灰调石色（点缀），圆角整体加大（xl=32）。
+  规则：深可可 = 主操作，杏橙 = 选中；黏土质感阴影与宠物角色见 `src/styles/warm.css`（含未覆盖样式标注）。
+  `ui-ux-pro-max-design-system.md` 原文仍未提供，扁平卡通橙 `#FF7A59` 已被本次暖色方案取代。
 - 在线预览：https://jshi3779.github.io/chongban-pet-growth/（GitHub Actions 构建并部署 `dist/`）。

@@ -1,0 +1,75 @@
+/* ===== POMU 暖色黏土风（Soft & Warm / Matte Clay）=====
+   色彩：奶油白（页面）+ 杏橙（选中/高亮）+ 深可可（文字与主操作）+ 鼠尾草绿/灰调石色（点缀）。
+   这些色值已同步进 style-baseline/theme.css 变量，此处只用变量组合。
+   ⚠️ 未覆盖样式：哑光黏土质感（外柔影 + 内高光 + 内暗边）基线没有 → 用 --shadow-md + 由 --color-bg-card /
+      --color-text-primary 通过 color-mix 混出的内阴影，兜底 Token --shadow-md
+   ⚠️ 未覆盖样式：3D 黏土宠物角色 → 用 SVG 渐变近似（见 Mascot），不引入新色值 */
+:root{
+  --action:var(--color-text-primary);            /* 深可可 = 主操作 */
+  --on-action:var(--color-bg-page);
+  --accent:var(--color-primary-500);              /* 杏橙 = 选中 / 高亮 */
+  --on-accent:var(--color-text-primary);
+  --clay-hi:color-mix(in srgb,var(--color-bg-card) 90%,transparent);
+  --clay-lo:color-mix(in srgb,var(--color-text-primary) 7%,transparent);
+  --clay:var(--shadow-md),inset 0 var(--space-xs) var(--space-sm) var(--clay-hi),inset 0 calc(var(--space-xs)*-1) var(--space-sm) var(--clay-lo);
+  --clay-sm:var(--shadow-sm),inset 0 var(--space-xs) var(--space-xs) var(--clay-hi),inset 0 calc(var(--space-xs)*-1) var(--space-xs) var(--clay-lo);
+  --stone:color-mix(in srgb,var(--color-text-tertiary) 22%,var(--color-bg-page));
+  --sage:var(--color-success);
+  --sage-tint:color-mix(in srgb,var(--color-success) 20%,var(--color-bg-page));
+}
+body,.stage{background:var(--stone)}
+.phone{background:var(--color-bg-page);border-color:var(--color-text-primary)}
+/* 卡片：大圆角 + 黏土质感，去掉边框 */
+.sd-card,.slotcard,.chkrow,.post,.monthgrid,.monthpill,.wd,.face,.bento button,.quick button,.sd-tabbar,.commnav button.on{box-shadow:var(--clay)}
+.sd-card{border:0;background:var(--color-bg-card)}
+.sd-stat,.stats .sd-stat{box-shadow:inset 0 var(--space-xs) var(--space-xs) var(--clay-lo);background:var(--color-bg-page)}
+/* 主操作：深可可 */
+.sd-btn--primary,.roundbtn,.fab,.pill--done,.upnext{background:var(--action);color:var(--on-action);box-shadow:var(--clay)}
+.sd-btn--default{background:var(--color-bg-card);box-shadow:var(--clay-sm);border-color:transparent}
+.sd-btn{box-shadow:var(--clay-sm)}
+.sd-btn--primary{box-shadow:var(--clay)}
+.sd-btn--primary:active{background:var(--color-text-secondary)}
+.toast{background:var(--action);color:var(--on-action)}
+/* 选中 / 高亮：杏橙底 + 深可可字（对比度达标） */
+.chip.on,.sd-tabbar__item.on,.wd.sel,.mg.sel,.day.today b,.bento .p,.pill--warn,.circ.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.sd-tabbar__item.on{box-shadow:var(--clay-sm)}
+.wd.sel small,.wd.sel em{color:var(--on-accent);opacity:.7}
+.wd.today b,.mg.today b{color:var(--color-primary-700)}
+.wd.sel.today b,.mg.sel.today b{color:var(--on-accent)}
+.bento .p i{background:var(--color-primary-100)}
+.chip{box-shadow:var(--clay-sm);border-color:transparent}
+.commnav button.on{box-shadow:none;border-bottom-color:var(--accent)}
+.upnext small{color:var(--color-text-disabled)}
+.upnext__ic{background:var(--accent);color:var(--on-accent)}
+.post__like.on{color:var(--color-primary-700)}
+.pethead{background:var(--color-primary-50);border-radius:0 0 calc(var(--radius-xl)*1.5) calc(var(--radius-xl)*1.5)}
+.face.add{background:var(--accent);color:var(--on-accent)}
+/* 点缀：鼠尾草绿 / 灰调石色（降低视觉疲劳） */
+.sd-tag--success,.chkrow__st--ok{background:var(--sage-tint);color:var(--color-text-primary)}
+.chkrow__st--ok{background:var(--sage);color:var(--color-bg-card);box-shadow:0 0 0 var(--space-xs) var(--sage-tint)}
+.pill--soft{background:var(--stone);color:var(--color-text-secondary)}
+.pill__dot{background:var(--sage)}
+.post__txt{background:var(--sage-tint)}
+.post:nth-child(even) .post__txt{background:var(--color-primary-50)}
+.slotcard__ic,.chkrow__thumb{box-shadow:var(--clay-sm)}
+.collage .pet-photo{border-color:var(--color-bg-card)}
+/* 低信息密度：更宽松的留白 */
+main{padding-left:var(--space-2xl);padding-right:var(--space-2xl)}
+.pethead{margin-left:calc(var(--space-2xl)*-1);margin-right:calc(var(--space-2xl)*-1);padding-left:var(--space-2xl);padding-right:var(--space-2xl)}
+.commnav{margin-left:calc(var(--space-2xl)*-1);margin-right:calc(var(--space-2xl)*-1)}
+.card,.sd-card{margin-bottom:var(--space-xl)}
+.sd-card{padding:var(--space-xl)}
+.sd-tabbar{box-shadow:var(--clay);background:var(--color-bg-card)}
+.fab{box-shadow:var(--clay)}
+/* 黏土宠物角色 */
+.bigface{border:0;background:none;box-shadow:none;overflow:visible;width:calc(var(--unit)*2.25);height:calc(var(--unit)*2.25)}
+.mascot{width:100%;height:100%;display:block;filter:drop-shadow(0 var(--space-sm) var(--space-sm) var(--clay-lo))}
+.m-body{fill:url(#clay)}
+.m-ear{fill:url(#clay)}
+.m-in{fill:var(--color-primary-100)}
+.m-eye{fill:var(--color-text-primary)}
+.m-cheek{fill:var(--color-primary-300);opacity:.45}
+.m-nose{fill:var(--color-text-primary)}
+.m-hi{fill:var(--color-bg-card);opacity:.55}
+.m-stop1{stop-color:var(--color-bg-card)}
+.m-stop2{stop-color:var(--color-primary-100)}

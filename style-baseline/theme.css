@@ -2,39 +2,39 @@
    UI 样式基线 · theme.css
    ------------------------------------------------------------
    由 style-dna 从「宠物追踪 App」截图提取生成（v1.0.0）。
-   ⚠️ v1.1：主色按 AGENTS.md 指示切换为扁平卡通橙 #FF7A59（色阶由 500 推算，ui-ux-pro-max-design-system.md 未提供，待校对）。
-   下游页面统一 @import 本文件，禁止在页面内硬编码样式值。
+      下游页面统一 @import 本文件，禁止在页面内硬编码样式值。
+   ⚠️ v1.2：按 POMU 暖色黏土风格重设色板（奶油白 #FFF8EC / 杏橙 #F6A15F / 深可可 #39271F / 鼠尾草绿 #8FB59B），圆角整体加大。
    加载链：base.json → frontend/frontend-base.json → frontend/app.json
    ============================================================ */
 
 :root {
   /* ---------- 色彩 · 品牌主色 ---------- */
-  --color-primary-50:  #FFF1EC;
-  --color-primary-100: #FFDDD2;
-  --color-primary-300: #FFA68E;
-  --color-primary-500: #FF7A59;
-  --color-primary-700: #E0562F;
+  --color-primary-50:#FFF1E2;
+  --color-primary-100:#FDDFC2;
+  --color-primary-300:#F9BE8C;
+  --color-primary-500:#F6A15F;
+  --color-primary-700:#D9803A;
 
   /* ---------- 色彩 · 语义色 ---------- */
-  --color-success: #34C759;
-  --color-warning: #F5A623;
-  --color-error:   #FF4D5C;
-  --color-info:    #FF7A59;
-  --color-violet:  #8B5CF6;
+  --color-success:#8FB59B;
+  --color-warning:#E9B35E;
+  --color-error:#D9715C;
+  --color-info:#F6A15F;
+  --color-violet:#A79DB8;
 
   /* ---------- 色彩 · 中性色 ---------- */
-  --color-text-primary:   #1A1D21;
-  --color-text-secondary: #5B6168;
-  --color-text-tertiary:  #8A8F98;
-  --color-text-disabled:  #C5C9CE;
-  --color-bg-page:  #F2F3F5;
-  --color-bg-card:  #FFFFFF;
-  --color-bg-mask:  rgba(0,0,0,0.45);
-  --color-border-base:    #E8EAED;
-  --color-divider:        #EEF0F3;
+  --color-text-primary:#39271F;
+  --color-text-secondary:#6E5A4E;
+  --color-text-tertiary:#A39385;
+  --color-text-disabled:#D8CCBE;
+  --color-bg-page:#FFF8EC;
+  --color-bg-card:#FFFDF9;
+  --color-bg-mask:rgba(57,39,31,0.45);
+  --color-border-base:#EDE2D3;
+  --color-divider:#F2E9DB;
 
   /* ---------- 字体 ---------- */
-  --font-family-base:   -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-family-base:"DejaVu Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-family-number: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-size-caption: 11px;
   --font-size-body:    13px;
@@ -62,21 +62,21 @@
   --space-touch-lg: 48px;   /* 主按钮 / 胶囊按钮高度 */
 
   /* ---------- 圆角 ---------- */
-  --radius-sm:   8px;
-  --radius-md:   12px;
-  --radius-lg:   16px;
-  --radius-xl:   20px;
+  --radius-sm:12px;
+  --radius-md:16px;
+  --radius-lg:24px;
+  --radius-xl:32px;
   --radius-full: 999px;
 
   /* ---------- 阴影 ---------- */
-  --shadow-sm: 0 2px 6px rgba(26,29,33,0.05);
-  --shadow-md: 0 4px 12px rgba(26,29,33,0.08);
-  --shadow-lg: 0 8px 24px rgba(26,29,33,0.10);
-  --shadow-xl: 0 16px 40px rgba(26,29,33,0.12);
+  --shadow-sm:0 2px 6px rgba(57,39,31,0.05);
+  --shadow-md:0 4px 12px rgba(57,39,31,0.08);
+  --shadow-lg:0 8px 24px rgba(57,39,31,0.10);
+  --shadow-xl:0 16px 40px rgba(57,39,31,0.12);
 
   /* ---------- 动效 ---------- */
   --motion-duration-fast: 150ms;
-  --motion-duration-base: 300ms;
+  --motion-duration-base:300ms;
   --motion-duration-slow: 400ms;
   --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -120,8 +120,8 @@ body {
   cursor: pointer;
   transition: all var(--motion-duration-fast) var(--motion-ease-standard);
 }
-.sd-btn--primary { background: var(--color-primary-500); color: #fff; }
-.sd-btn--primary:active { background: var(--color-primary-700); }
+.sd-btn--primary { background: var(--color-text-primary); color: var(--color-bg-page); }
+.sd-btn--primary:active { background: var(--color-text-secondary); }
 .sd-btn--default {
   background: var(--color-bg-card);
   color: var(--color-text-primary);
@@ -187,7 +187,7 @@ body {
   color: var(--color-text-tertiary);
 }
 .sd-tabbar__item.on {
-  color: var(--color-bg-card);
+  color: var(--color-text-primary);
   background: var(--color-primary-500);
   border-radius: var(--radius-full);
 }

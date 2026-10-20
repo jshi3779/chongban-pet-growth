@@ -6,7 +6,7 @@ import type { Kind } from '../types';
 export type SheetState = { type: 'record'; kind: Kind; date: string } | { type: 'pet' } | { type: 'post' } | { type: 'pick'; date: string } | { type: 'detail'; id: number } | null;
 export type FormData2 = Record<string, string>;
 
-const PICK: [Kind, string][] = [['vaccine', '接种记录与下次提醒'], ['weight', '记录今天的体重'], ['deworm', '体内 / 体外驱虫'], ['milestone', '成长中的小瞬间']];
+const PICK: [Kind, string][] = [['vaccine', '接种记录与下次提醒'], ['deworm', '体内 / 体外驱虫']];
 
 const LABEL: Record<Kind, [string, string]> = {
   weight: ['', ''],

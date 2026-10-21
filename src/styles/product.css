@@ -15,3 +15,8 @@
 /* ⚠️ 未覆盖样式：窄屏手机容器，使用兜底 Token --space-xl / --unit；保留桌面外框，限制到可用视口。 */
 .stage{min-width:0;width:100%;padding:min(var(--space-xl),2vw)}
 .phone{min-width:0;width:min(calc(var(--unit)*8.125),100%);height:min(calc(var(--unit)*17.5),calc(100dvh - var(--space-xl)*2))}
+/* ⚠️ 未覆盖样式：健康日历标题分行，使用兜底 Token --space-sm；避免窄屏标题与月份挤压。 */
+.caltop{flex-wrap:wrap}
+.caltop h2{flex-basis:100%;margin:0}
+.caltop .monthpill{flex:1;min-width:0}
+.monthpill>span,.sd-tabbar__item>span{white-space:nowrap}

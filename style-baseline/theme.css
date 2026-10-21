@@ -18,21 +18,21 @@
   --color-activity-3:#1687f6;
   --color-activity-4:#075baa;
   /* 11pets official-store UI reference, user-requested refresh, 2026-10-21. */
-  --color-nav-active:#b13c99;
+  --color-nav-active:#2c7bdd;
   --color-surface-muted:#f5f7f7;
   --color-shell:#e9eeef;
   /* ---------- 色彩 · 品牌主色 ---------- */
-  --color-primary-50:#eaf8f8;
-  --color-primary-100:#c9f1ee;
-  --color-primary-300:#71d8d0;
-  --color-primary-500:#1ab7ad;
-  --color-primary-700:#087e78;
+  --color-primary-50:#edf4ff;
+  --color-primary-100:#d9e9ff;
+  --color-primary-300:#a6cdff;
+  --color-primary-500:#4d96f6;
+  --color-primary-700:#2c7bdd;
 
   /* ---------- 色彩 · 语义色 ---------- */
   --color-success:#12806b;
   --color-warning:#a56c0a;
   --color-error:#bd4153;
-  --color-info:#087e78;
+  --color-info:#2c7bdd;
   --color-violet:#a665c6;
 
   /* ---------- 色彩 · 中性色 ---------- */

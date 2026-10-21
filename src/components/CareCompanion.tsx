@@ -7,7 +7,7 @@ export function CareCompanion({ showActions = true }: { showActions?: boolean })
   return <>
     <section className="sd-card card companion" aria-labelledby="care-title">
       <div className="card-tools"><span className="sd-tag">照护小助手 · 本地整理</span><button className="tool-icon" aria-label="档案导出与备份" title="档案导出与备份" onClick={openArchive}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5" /></svg></button></div>
-      <h3 id="care-title">这周，一起好好长大</h3>
+      <h3 id="care-title">本周照护</h3>
       <p className="product-note">按你录入的记录整理 · 初始档案含演示数据</p>
       <b>近7天记录 {week.length} 条</b>
       <p>{due.length ? `${due.length} 项逾期或14天内到期，请核对提醒日期。` : '暂无已录入的近期到期事项；不代表已完成全部照护。'}</p>

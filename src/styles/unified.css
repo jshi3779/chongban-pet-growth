@@ -1,0 +1,33 @@
+/* 用户提供的蓝白宠物App视觉，统一所有页面；叠层尺寸复用既有空间Token。 */
+:root{--action:var(--color-profile-dark);--accent:var(--color-profile-blue)}
+.phone .app{background:var(--color-profile-paper)}
+.growth{background:linear-gradient(135deg,var(--color-profile-light),var(--color-profile-blue));color:var(--color-profile-paper);border-radius:var(--radius-xl);box-shadow:var(--shadow-md);padding:var(--space-lg)}
+.growth p{color:var(--color-profile-paper)}
+.sd-card,.post,.chkrow,.ev{border:0;border-radius:var(--radius-xl);background:var(--color-profile-paper);box-shadow:var(--shadow-md)}
+.chkrow,.ev{background:linear-gradient(135deg,var(--color-profile-paper),var(--color-profile-soft));border:thin solid var(--color-divider)}
+.sd-btn--primary,.fab{background:linear-gradient(135deg,var(--color-profile-light),var(--color-profile-blue) 75%);color:var(--color-profile-paper);box-shadow:var(--shadow-md)}
+.chip.on{background:var(--color-profile-blue);border-color:var(--color-profile-blue);color:var(--color-profile-paper);box-shadow:var(--shadow-sm)}
+.caltop{padding:0;background:transparent;margin:var(--space-lg) 0 var(--space-xl);display:flex;justify-content:center}
+.monthpill{width:100%;justify-content:center}
+.health-activity{padding:var(--space-lg);border-radius:var(--radius-xl);background:var(--color-profile-paper);box-shadow:var(--shadow-md)}
+.activity-cell.is-selected{outline-color:var(--color-profile-dark)}
+.ev__ic,.chkrow__thumb,.quick i{background:var(--color-primary-50);color:var(--color-profile-dark)}
+.ev__delta.up{background:var(--color-primary-50);color:var(--color-profile-dark)}
+.commnav{border:0;padding:var(--space-xs);gap:var(--space-xs);background:var(--color-profile-soft);border-radius:var(--radius-lg)}
+.commnav button{flex:1;border:0;border-radius:var(--radius-md);font-weight:var(--font-weight-medium)}
+.commnav button.on{background:linear-gradient(135deg,var(--color-profile-light),var(--color-profile-blue));color:var(--color-profile-paper);box-shadow:var(--shadow-sm)}
+.post__txt{background:var(--color-primary-50)}
+.post__like.on{color:var(--color-profile-dark)}
+.feed{gap:var(--space-md)}
+.feed__col{gap:var(--space-lg)}
+.phone .sd-tabbar,.phone[data-page="home"] .sd-tabbar{bottom:var(--space-lg);left:var(--space-lg);width:calc(100% - var(--space-3xl));border:thin solid var(--color-divider);border-radius:var(--radius-full);padding:var(--space-sm);box-shadow:var(--shadow-lg);background:var(--color-profile-paper)}
+.phone .sd-tabbar__item,.phone[data-page="home"] .sd-tabbar__item{flex:1;display:flex;justify-content:center;align-items:center;border-radius:var(--radius-full)}
+.phone .sd-tabbar__item.on,.phone[data-page="home"] .sd-tabbar__item.on{flex:1;background:var(--color-primary-50);color:var(--color-profile-dark)}
+.phone .sd-tabbar svg{width:var(--space-3xl);height:var(--space-3xl)}
+.profile-toolbar .profile-settings{left:0;right:auto;display:grid;place-items:center}
+.profile-settings svg{width:var(--space-xl);height:var(--space-xl);fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
+.profile-social{margin-bottom:0}
+.ruler-entry{display:grid;place-items:center;width:78%;min-height:var(--space-touch-lg);border:thin dashed var(--color-profile-light);border-radius:var(--radius-xl);background:var(--color-primary-50);color:var(--color-profile-dark);font-size:var(--font-size-h1)}
+.phone .app{padding-bottom:calc(var(--unit)*2.4)}
+
+.seg--entry{min-height:0}

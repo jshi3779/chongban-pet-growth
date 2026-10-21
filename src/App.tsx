@@ -28,18 +28,20 @@ export default function App() {
   }, []);
   const pet = curPet(s);
 
+  const go = useCallback((t: Tab) => { setS(o => ({ ...o, tab: t, ...(t === 'calendar' ? { cal: calInit() } : {}) })); document.querySelector('.app')?.scrollTo(0, 0); }, []);
+
   const api: Api = useMemo(() => ({
-    s, pet,
+    s, pet, go,
     patch: p => setS(o => ({ ...o, ...p })),
     openRecord: (kind: Kind, date?: string, value?: string) => setSheet({ type: 'record', kind, date: date || today(), value }),
     openPet: () => setSheet({ type: 'pet' }),
+    openArchive: () => setSheet({ type: 'archive' }),
     del: id => { if (confirm('确定删除这条记录？')) setS(o => ({ ...o, records: o.records.filter(r => r.id !== id) })); },
-    soon: n => say(`「${n}」即将上线`),
     openPick: (date: string) => setSheet({ type: 'pick', date }),
     openPost: draft => setSheet({ type: 'post', draft }),
     openDetail: (id: number) => setSheet({ type: 'detail', id }),
     like: (id: number) => setS(o => ({ ...o, posts: o.posts.map(p => (p.id === id ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) } : p)) })),
-  }), [s, pet, say]);
+  }), [s, pet, say, go]);
 
   const submit = (d: FormData2) => {
     if (!sheet) return;
@@ -65,7 +67,7 @@ export default function App() {
     setSheet(null);
   };
 
-  const go = (t: Tab) => { setS(o => ({ ...o, tab: t, ...(t === 'calendar' ? { cal: calInit() } : {}) })); document.querySelector('.app')?.scrollTo(0, 0); };
+
   const View = { home: Home, calendar: CalendarView, timeline: TimelineView, community: Community }[s.tab];
 
   return (

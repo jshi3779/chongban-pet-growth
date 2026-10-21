@@ -1,9 +1,11 @@
+import { WeightEntry } from './WeightEntry';
+import { downloadText, healthText } from '../product';
 import type { FormEvent } from 'react';
 import { useApp } from '../ctx';
 import { EMOJI, KIND, today } from '../utils';
 import type { Kind } from '../types';
 
-export type SheetState = { type: 'record'; kind: Kind; date: string; value?: string } | { type: 'pet' } | { type: 'post'; draft?: { title: string; body: string } } | { type: 'pick'; date: string } | { type: 'detail'; id: number } | null;
+export type SheetState = { type: 'record'; kind: Kind; date: string; value?: string } | { type: 'archive' } | { type: 'pet' } | { type: 'post'; draft?: { title: string; body: string } } | { type: 'pick'; date: string } | { type: 'detail'; id: number } | null;
 export type FormData2 = Record<string, string>;
 
 const PICK: [Kind, string][] = [['vaccine', '接种记录与下次提醒'], ['deworm', '体内 / 体外驱虫']];
@@ -16,7 +18,7 @@ const LABEL: Record<Kind, [string, string]> = {
 };
 
 export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose: () => void; onSubmit: (d: FormData2) => void }) {
-  const { s, like, openRecord } = useApp();
+  const { s, pet, like, openRecord } = useApp();
   if (!sheet) return null;
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +33,16 @@ export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose
   return (
     <div id="sheet" className="sheet">
       <div className="mask" onClick={onClose} />
-      {sheet.type === 'pick' ? (
+      {sheet.type === 'archive' ? (
+        <section className="panel" id="form" role="dialog" aria-modal="true" aria-label="档案导出与备份">
+          <h4>档案导出与备份</h4>
+          <p className="product-note">资料仅存当前浏览器，清理数据或换设备可能丢失。照护档案包含当前宠物的健康记录，请仅分享给可信照护者。JSON备份包含全部宠物与本机帖子，可供留存；当前版本尚不支持恢复导入。</p>
+          <div className="product-actions"><button className="sd-btn sd-btn--primary" data-act="export-health" onClick={() => downloadText(`宠伴-${pet.name}-照护档案.txt`, healthText(s, pet))}>导出照护档案</button><button className="sd-btn sd-btn--default" data-act="export-backup" onClick={() => downloadText(`宠伴-本机备份-${today()}.json`, JSON.stringify(s, null, 2), 'application/json')}>下载本机备份</button></div>
+          <div className="product-actions"><button className="sd-btn sd-btn--default" data-close onClick={onClose}>关闭</button></div>
+        </section>
+      ) : sheet.type === 'record' && sheet.kind === 'weight' ? (
+        <WeightEntry key={`${s.cur}-${sheet.date}`} date={sheet.date} value={sheet.value} onClose={onClose} onSubmit={onSubmit} />
+      ) : sheet.type === 'pick' ? (
         <div className="panel pick" id="form" role="dialog" aria-label="添加事件">
           <h4>添加事件</h4>
           <p className="pick__date">日期：{sheet.date}</p>
@@ -78,11 +89,9 @@ export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose
         <form className="panel" id="form" onSubmit={submit} key={`${sheet.kind}${sheet.date}`}>
           <h4>{KIND[sheet.kind].e} 记录{KIND[sheet.kind].n}</h4>
           <label>日期<input className="sd-input" name="date" type="date" defaultValue={sheet.date} max={today()} required /></label>
-          {sheet.kind === 'weight'
-            ? <label>体重 (kg)<input className="sd-input" name="value" type="number" step="0.01" min="0.01" defaultValue={sheet.value} required /></label>
-            : <label>{LABEL[sheet.kind][0]}<input className="sd-input" name="name" required placeholder={LABEL[sheet.kind][1]} /></label>}
+          <label>{LABEL[sheet.kind][0]}<input className="sd-input" name="name" required placeholder={LABEL[sheet.kind][1]} /></label>
           {(sheet.kind === 'vaccine' || sheet.kind === 'deworm') && <label>下次到期日（可选）<input className="sd-input" name="next" type="date" /></label>}
-          {sheet.kind !== 'weight' && <label>备注<input className="sd-input" name="note" maxLength={60} /></label>}
+          <label>备注<input className="sd-input" name="note" maxLength={60} /></label>
           {acts}
         </form>
       ) : (

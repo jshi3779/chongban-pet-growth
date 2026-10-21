@@ -8,6 +8,7 @@ export interface Api {
   patch: (p: Partial<AppState>) => void;
   openRecord: (kind: Kind, date?: string, value?: string) => void;
   openPet: () => void;
+  openArchive: () => void;
   del: (id: number) => void;
   openPick: (date: string) => void;
   openPost: (draft?: { title: string; body: string }) => void;

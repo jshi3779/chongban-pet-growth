@@ -8,6 +8,11 @@ import { Photo } from './Common';
 export function Home() {
   const { s, pet, patch, openPet } = useApp();
   return <>
+    <div className="sd-card card album">
+      <h3>成长相册<small>灵感照片 · 示例</small></h3>
+      <div className="collage"><Photo cls="a" src="cat.jpg" alt="猫咪的好奇瞬间" /><Photo cls="b" src="dog.jpg" alt="狗狗的户外时光" /><Photo cls="c" src="cat-memory.jpg" alt="猫咪的午后" /></div>
+      <div className="album-footer"><span>♡ 小小瞬间，慢慢收藏</span><span>OUR MEMORIES</span></div>
+    </div>
     <section className="pethead">
       <div className="pethead__row">
         <span className="bigface"><Mascot type={pet.type} label={`${pet.name}的黏土形象`} /></span>
@@ -20,10 +25,5 @@ export function Home() {
     <p className="product-promise">记录成长，理清照护，在同城遇见懂你的人。</p>
     <WeightPanel />
     <CareCompanion />
-    <div className="sd-card card album">
-      <h3>成长相册<small>灵感照片 · 示例</small></h3>
-      <div className="collage"><Photo cls="a" src="cat.jpg" alt="猫咪的好奇瞬间" /><Photo cls="b" src="dog.jpg" alt="狗狗的户外时光" /><Photo cls="c" src="cat-memory.jpg" alt="猫咪的午后" /></div>
-      <div className="album-footer"><span>♡ 小小瞬间，慢慢收藏</span><span>OUR MEMORIES</span></div>
-    </div>
   </>;
 }

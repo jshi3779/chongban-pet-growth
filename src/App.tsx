@@ -35,6 +35,7 @@ export default function App() {
     patch: p => setS(o => ({ ...o, ...p })),
     openRecord: (kind: Kind, date?: string, value?: string) => setSheet({ type: 'record', kind, date: date || today(), value }),
     openPet: () => setSheet({ type: 'pet' }),
+    openArchive: () => setSheet({ type: 'archive' }),
     del: id => { if (confirm('确定删除这条记录？')) setS(o => ({ ...o, records: o.records.filter(r => r.id !== id) })); },
     openPick: (date: string) => setSheet({ type: 'pick', date }),
     openPost: draft => setSheet({ type: 'post', draft }),

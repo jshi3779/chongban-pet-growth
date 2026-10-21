@@ -20,3 +20,8 @@
 .caltop h2{flex-basis:100%;margin:0}
 .caltop .monthpill{flex:1;min-width:0}
 .monthpill>span,.sd-tabbar__item>span{white-space:nowrap}
+/* ⚠️ 未覆盖样式：卡片导出小图标，使用兜底 Token --space-touch / --space-xl，保留触控热区。 */
+.card-tools{display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm)}
+.tool-icon{width:var(--space-touch);height:var(--space-touch);flex:none;display:grid;place-items:center;border-radius:var(--radius-full);background:var(--color-bg-page);color:var(--color-text-secondary)}
+.tool-icon svg{width:var(--space-xl);height:var(--space-xl);fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.phone[data-page="home"] .album:first-child{margin-top:var(--space-3xl)}

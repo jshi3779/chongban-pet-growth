@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '../ctx';
-import { KIND, calInit, dayDiff, recsOf, reminders, streak, today, ymd } from '../utils';
+import { KIND, calInit, recsOf, reminders, today, ymd } from '../utils';
 import { isHealth, withDemo } from '../demo';
-import type { Kind, PetRecord } from '../types';
+import type { PetRecord } from '../types';
 import { PetSwitch } from './Common';
 
-const KINDS: Kind[] = ['vaccine', 'deworm'];
 const WEEK = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
 const parse = (d: string) => new Date(`${d}T00:00:00`);
@@ -17,18 +16,8 @@ function monday(d: string) {
   t.setDate(t.getDate() - w); return fmt(t);
 }
 
-/** 当天记录的状态胶囊（参考图二：黑底=已完成，灰点=待办，橙=逾期） */
-function Status({ r }: { r: PetRecord }) {
-  if (r.next) {
-    const l = dayDiff(r.next, today());
-    if (l < 0) return <span className="pill pill--warn">已逾期 {-l} 天</span>;
-    if (l <= 14) return <span className="pill pill--soft"><i className="pill__dot" />{l} 天后到期</span>;
-  }
-  return <span className="pill pill--done">已完成</span>;
-}
-
 export function CalendarView() {
-  const { s: real, pet, patch, openPick, openRecord, del } = useApp();
+  const { s: real, pet, patch } = useApp();
   const { st: s, demo } = withDemo(real, pet.id);
   const [open, setOpen] = useState(false);
   const c = s.cal || calInit();
@@ -41,7 +30,6 @@ export function CalendarView() {
   const go = (d: string) => { const t = parse(d); patch({ cal: { y: t.getFullYear(), m: t.getMonth(), sel: d } }); };
   const start = monday(sel);
   const days = Array.from({ length: 7 }, (_, i) => addDays(start, i));
-  const sl = byDay[sel] || [], due = dueDay[sel], future = sel > today();
 
   // 图一风格的打卡列表：待办（来自到期提醒）在前，已完成记录在后
   const rem = reminders(s, pet.id);
@@ -66,7 +54,6 @@ export function CalendarView() {
           </button>
           <button className="x" aria-label={open ? '下个月' : '下一周'} data-calnav="1" onClick={() => step(1)}>›</button>
         </div>
-        <button className="roundbtn" aria-label="在所选日期添加记录" onClick={() => openPick(future ? today() : sel)}>＋</button>
       </div>
 
       {open ? (
@@ -84,7 +71,7 @@ export function CalendarView() {
               );
             })}
           </div>
-          <div className="legend"><i className="dot weight" />体重 <i className="dot vaccine" />疫苗 <i className="dot deworm" />驱虫 <i className="dot milestone" />瞬间 <i className="dot due" />到期日</div>
+          <div className="legend"><i className="dot vaccine" />疫苗 <i className="dot deworm" />驱虫 <i className="dot due" />到期日</div>
         </div>
       ) : (
         <div className="weekstrip" role="tablist">
@@ -102,39 +89,6 @@ export function CalendarView() {
   
       )}
 
-      <div className="stats stats--mb">
-        <div className="sd-stat"><strong>{streak(s, pet.id)}</strong><span>连续打卡 天</span></div>
-        <div className="sd-stat"><strong>{all.filter(r => r.date.slice(0, 7) === sel.slice(0, 7)).length}</strong><span>本月记录</span></div>
-        <div className="sd-stat"><strong>{all.length}</strong><span>累计记录</span></div>
-      </div>
-
-      <section className="daylist" aria-label={`${sel} 的打卡`}>
-        {sl.map(r => (
-          <div key={r.id} className="slot">
-            <div className="slot__t"><b>{KIND[r.kind].n}</b><small>{r.date.slice(5)}</small></div>
-            <article className="slotcard">
-              <div className="slotcard__top">
-                <span className="slotcard__ic">{KIND[r.kind].e}</span>
-                <div className="slotcard__tx"><b>{r.kind === 'weight' ? `体重 ${r.value} kg` : r.name}</b><small>{r.note || (r.next ? `下次 ${r.next}` : pet.name)}</small></div>
-              </div>
-              <div className="slotcard__foot"><Status r={r} />{r.id > 0 ? <button className="x" data-del={r.id} onClick={() => del(r.id)}>删除</button> : <span className="demotag">示例</span>}</div>
-            </article>
-          </div>
-        ))}
-        {due && !sl.length && (
-          <div className="slot"><div className="slot__t"><b>到期</b><small>{sel.slice(5)}</small></div>
-            <article className="slotcard"><div className="slotcard__top"><span className="slotcard__ic">{KIND[due.kind].e}</span><div className="slotcard__tx"><b>{due.name}</b><small>今天需要安排</small></div></div><div className="slotcard__foot"><span className="pill pill--warn">待完成</span></div></article></div>
-        )}
-        {!future && (
-          <div className="slot"><div className="slot__t"><b>{sl.length ? '再来一条' : '今日'}</b></div>
-            <div className="openslot" role="group" aria-label="添加打卡">
-              <span>＋ {sl.length ? '继续打卡' : '这天还没有打卡'}</span>
-              <div className="openslot__btns">{KINDS.map(k => <button key={k} data-add={k} data-date={sel} aria-label={`打卡${KIND[k].n}`} onClick={() => openRecord(k, sel)}>{KIND[k].e}</button>)}</div>
-            </div>
-          </div>
-        )}
-        {future && !sl.length && !due && <div className="empty">未来的日子，还不能打卡</div>}
-      </section>
 
       <div className="sec">待办提醒{demo && <span className="demotag demotag--lg">示例日程</span>}</div>
       <div className="chk">

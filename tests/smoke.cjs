@@ -38,11 +38,10 @@ const assert = require('node:assert/strict');
  await tab('calendar');assert.equal(await page.locator('.wd').count(),7);await page.locator('[data-calnav="1"]').click();
  await page.locator('.wd').first().click();await tab('timeline');await page.locator('[data-filter="weight"]').click();assert.equal(await page.locator('.ev').count(),7);
  const before=(await state()).records.length;page.once('dialog',d=>d.accept());await page.locator('[data-del]').first().click();assert.equal((await state()).records.length,before-1);
- await tab('calendar');await page.locator('[data-add="vaccine"]').first().click();await page.locator('[name="name"]').fill('测试疫苗');await save();assert.equal((await state()).records.at(-1).name,'测试疫苗');
  // More than eight historical entries must remain reachable after consolidation.
  await page.evaluate(()=>{const s=JSON.parse(localStorage.getItem('petgrowth.v1'));for(let i=0;i<10;i++)s.records.push({id:8000+i,petId:s.cur,kind:'vaccine',date:'2000-01-01',name:'历史回归'+i});s.tab='calendar';localStorage.setItem('petgrowth.v1',JSON.stringify(s));});
  await page.reload();const history=page.locator('[data-health-history]');await history.locator('summary').click();assert(await history.locator('.chkrow').count()>8);
- await history.getByRole('button',{name:/历史回归0/}).click();assert.match(await page.locator('.daylist').innerText(),/历史回归0/);
+ await history.getByRole('button',{name:/历史回归0/}).click();assert.equal((await state()).cal.sel,'2000-01-01');
  for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:900});
   for(const t of ['home','calendar','timeline','community']){await tab(t);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'overflow '+width+' '+t);}

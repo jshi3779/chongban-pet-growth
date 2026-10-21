@@ -1,3 +1,4 @@
+import { HealthHistory } from './HealthHistory';
 import { WeightEntry } from './WeightEntry';
 import { downloadText, healthText } from '../product';
 import type { FormEvent } from 'react';
@@ -5,7 +6,7 @@ import { useApp } from '../ctx';
 import { EMOJI, KIND, today } from '../utils';
 import type { Kind } from '../types';
 
-export type SheetState = { type: 'record'; kind: Kind; date: string; value?: string } | { type: 'archive' } | { type: 'pet' } | { type: 'post'; draft?: { title: string; body: string } } | { type: 'pick'; date: string } | { type: 'detail'; id: number } | null;
+export type SheetState = { type: 'record'; kind: Kind; date: string; value?: string } | { type: 'history' } | { type: 'archive' } | { type: 'pet' } | { type: 'post'; draft?: { title: string; body: string } } | { type: 'pick'; date: string } | { type: 'detail'; id: number } | null;
 export type FormData2 = Record<string, string>;
 
 const PICK: [Kind, string][] = [['vaccine', '接种记录与下次提醒'], ['deworm', '体内 / 体外驱虫']];
@@ -33,7 +34,7 @@ export function Sheet({ sheet, onClose, onSubmit }: { sheet: SheetState; onClose
   return (
     <div id="sheet" className="sheet">
       <div className="mask" onClick={onClose} />
-      {sheet.type === 'archive' ? (
+      {sheet.type === 'history' ? <HealthHistory onClose={onClose} /> : sheet.type === 'archive' ? (
         <section className="panel" id="form" role="dialog" aria-modal="true" aria-label="档案导出与备份">
           <h4>档案导出与备份</h4>
           <p className="product-note">资料仅存当前浏览器，清理数据或换设备可能丢失。照护档案包含当前宠物的健康记录，请仅分享给可信照护者。JSON备份包含全部宠物与本机帖子，可供留存；当前版本尚不支持恢复导入。</p>

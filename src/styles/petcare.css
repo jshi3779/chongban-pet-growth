@@ -98,3 +98,7 @@ main{padding:var(--space-xl) var(--space-lg) 0}
 .pet-avatar img{display:block;width:100%;height:100%;object-fit:cover}
 .pet-chip{display:inline-flex;align-items:center;gap:var(--space-sm);height:auto;min-height:var(--space-touch-lg);padding:var(--space-xs) var(--space-md) var(--space-xs) var(--space-xs)}
 .bigface .pet-avatar,.growth__m .pet-avatar{width:100%;height:100%}
+/* 健康日历标题与历史记录图标同排，月份切换仍独占一行居中。 */
+.calendar-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm);width:100%}
+.caltop .calendar-heading h2{flex-basis:auto}
+.calendar-heading .tool-icon{background:transparent}

@@ -17,7 +17,7 @@ function monday(d: string) {
 }
 
 export function CalendarView() {
-  const { s: real, pet, patch } = useApp();
+  const { s: real, pet, patch, openHistory } = useApp();
   const { st: s, demo } = withDemo(real, pet.id);
   const [open, setOpen] = useState(false);
   const c = s.cal || calInit();
@@ -33,7 +33,6 @@ export function CalendarView() {
 
   // 图一风格的打卡列表：待办（来自到期提醒）在前，已完成记录在后
   const rem = reminders(s, pet.id);
-  const done = all;
   const y0 = parse(sel).getFullYear(), m0 = parse(sel).getMonth();
   const lead = (new Date(y0, m0, 1).getDay() + 6) % 7, dim = new Date(y0, m0 + 1, 0).getDate();
   const shiftMonth = (n: number) => { const t = new Date(y0, m0 + n, 1); go(fmt(t)); };
@@ -45,7 +44,7 @@ export function CalendarView() {
     <>
       <PetSwitch />
       <div className="caltop">
-        <h2>健康日历</h2>
+        <div className="calendar-heading"><h2>健康日历</h2><button className="tool-icon" aria-label={`全部健康记录（${all.length}条）`} title="全部健康记录" onClick={openHistory}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H5V3h1m9 0v5h4M8 12h8M8 16h8" /></svg></button></div>
         <div className="monthpill">
           <button className="x" aria-label={open ? '上个月' : '上一周'} data-calnav="-1" onClick={() => step(-1)}>‹</button>
           <span>{monthLabel}</span>
@@ -102,20 +101,6 @@ export function CalendarView() {
         ))}
         {!rem.length && <div className="empty">暂无已录入的待办</div>}
       </div>
-      <details className="product-details" data-health-history>
-        <summary>全部健康记录（{done.length}条）</summary>
-        <div className="chk">
-        {done.map(r => (
-          <button key={r.id} className="chkrow" onClick={() => go(r.date)}>
-            <div className="chkrow__d"><small>{r.date.slice(5, 7)}月</small><b>{r.date.slice(8)}</b></div>
-            <span className={`chkrow__thumb k-${r.kind}`}>{KIND[r.kind].e}</span>
-            <div className="chkrow__tx"><b>{r.kind === 'weight' ? `体重 ${r.value} kg` : r.name}</b><small>已完成</small></div>
-            <span className="chkrow__st chkrow__st--ok" aria-hidden="true">✓</span>
-          </button>
-        ))}
-        {!done.length && <div className="empty">还没有打卡记录</div>}
-        </div>
-      </details>
     </>
   );
 }

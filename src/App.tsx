@@ -31,12 +31,12 @@ export default function App() {
   const api: Api = useMemo(() => ({
     s, pet,
     patch: p => setS(o => ({ ...o, ...p })),
-    openRecord: (kind: Kind, date?: string) => setSheet({ type: 'record', kind, date: date || today() }),
+    openRecord: (kind: Kind, date?: string, value?: string) => setSheet({ type: 'record', kind, date: date || today(), value }),
     openPet: () => setSheet({ type: 'pet' }),
     del: id => { if (confirm('确定删除这条记录？')) setS(o => ({ ...o, records: o.records.filter(r => r.id !== id) })); },
     soon: n => say(`「${n}」即将上线`),
     openPick: (date: string) => setSheet({ type: 'pick', date }),
-    openPost: () => setSheet({ type: 'post' }),
+    openPost: draft => setSheet({ type: 'post', draft }),
     openDetail: (id: number) => setSheet({ type: 'detail', id }),
     like: (id: number) => setS(o => ({ ...o, posts: o.posts.map(p => (p.id === id ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) } : p)) })),
   }), [s, pet, say]);
@@ -54,9 +54,9 @@ export default function App() {
       });
       say('已保存');
     } else if (sheet.type === 'post') {
-      const post: Post = { id: Date.now(), author: '我', pet: curPet(s).name, title: d.title, body: d.body || '', img: d.img || undefined, shape: 'a', likes: 0, liked: false, mine: true, ...(d.nearby ? { km: 0.1, place: '我的位置' } : {}) };
+      const post: Post = { id: Date.now(), author: '我', pet: curPet(s).name, petType: curPet(s).type, title: d.title.trim(), body: d.body?.trim() || '', img: d.img || undefined, shape: 'a', likes: 0, liked: false, mine: true, ...(d.nearby ? { city: d.city.trim(), district: d.district.trim() } : {}) };
       setS(o => ({ ...o, posts: [post, ...o.posts], comm: d.nearby ? 'nearby' : o.comm }));
-      say('已发布');
+      say('已保存到本机社区');
     } else if (sheet.type === 'pet') {
       const p = { id: `p${Date.now()}`, name: d.name, type: d.type, breed: d.breed, gender: d.gender, birthday: d.birthday };
       setS(o => ({ ...o, pets: [...o.pets, p], cur: p.id }));

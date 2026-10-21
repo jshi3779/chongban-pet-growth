@@ -35,6 +35,9 @@ export interface Post {
   km?: number;
   place?: string;
   mine?: boolean;
+  city?: string;
+  district?: string;
+  petType?: string;
 }
 
 export interface CalState { y: number; m: number; sel: string | null }
@@ -48,4 +51,6 @@ export interface AppState {
   cal: CalState;
   pets: Pet[];
   records: PetRecord[];
+  region: { city: string; district: string };
+  memberInterest: boolean;
 }

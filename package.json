@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "check:style": "bash style-check.sh"
+    "check:style": "bash style-check.sh",
+    "test": "node tests/product.cjs"
   },
   "dependencies": {
     "react": "^18.3.1",

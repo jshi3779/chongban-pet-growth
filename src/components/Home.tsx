@@ -1,3 +1,4 @@
+import { CareCompanion } from './CareCompanion';
 import { useApp } from '../ctx';
 import { EMOJI, KIND, age, recsOf, reminders } from '../utils';
 import { Mascot } from './Mascot';
@@ -11,6 +12,7 @@ export function Home() {
   const goCommunity = () => { patch({ tab: 'community' }); document.querySelector('.app')?.scrollTo(0, 0); };
   return (
     <>
+      <p className="product-promise">记录成长，理清照护，在同城遇见懂你的人。</p>
       <section className="pethead">
         <div className="pethead__row">
           <span className="bigface"><Mascot type={pet.type} label={`${pet.name}的黏土形象`} /></span>
@@ -39,11 +41,12 @@ export function Home() {
             <button data-add="vaccine" onClick={() => openRecord('vaccine')}><i>💉</i>打疫苗</button>
             <button data-add="deworm" onClick={() => openRecord('deworm')}><i>🐛</i>驱虫</button>
             <button data-add="milestone" onClick={() => openRecord('milestone')}><i>🎉</i>成长瞬间</button>
-            <button className="soon" data-tab="community" onClick={goCommunity}><i>📍</i>附近宠友</button>
-            <button className="soon" data-tab="community" onClick={goCommunity}><i>📸</i>晒日常</button>
+            <button data-tab="community" onClick={goCommunity}><i>📍</i>附近宠友</button>
+            <button data-tab="community" onClick={goCommunity}><i>📸</i>晒日常</button>
             <button className="soon" data-soon="就医记录" onClick={() => soon('就医记录')}><i>🏥</i>就医</button>
             <button className="soon" data-soon="宠物商城" onClick={() => soon('宠物商城')}><i>🛒</i>用品</button>
           </div>
+          <CareCompanion />
           <div className="sd-card card album">
             <h3>成长相册<small>灵感照片 · 示例</small></h3>
             <div className="collage">
@@ -60,7 +63,7 @@ export function Home() {
                 <div className="sd-row__grow"><b>{KIND[r.kind].e} {r.name}</b><br /><small>下次：{r.next}</small></div>
                 <DueTag next={r.next as string} short />
               </div>
-            )) : <div className="empty">暂无待办，健康状态良好 ✅</div>}
+            )) : <div className="empty">暂无已录入的待办，记得核对照护计划</div>}
           </div>
           <div className="sd-card card"><h3>体重曲线<small><button className="x" data-add="weight" onClick={() => openRecord('weight')}>＋记录</button></small></h3><Chart /></div>
           <div className="sd-card card">

@@ -27,5 +27,7 @@
 .profile-toolbar .profile-settings{left:0;right:auto;display:grid;place-items:center}
 .profile-settings svg{width:var(--space-xl);height:var(--space-xl);fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
 .profile-social{margin-bottom:0}
-.ruler-entry{display:grid;place-items:center;width:100%;min-height:calc(var(--unit)*1.8);border:thin dashed var(--color-profile-light);border-radius:var(--radius-xl);background:var(--color-primary-50);color:var(--color-profile-dark);font-size:var(--font-size-h1)}
+.ruler-entry{display:grid;place-items:center;width:78%;min-height:var(--space-touch-lg);border:thin dashed var(--color-profile-light);border-radius:var(--radius-xl);background:var(--color-primary-50);color:var(--color-profile-dark);font-size:var(--font-size-h1)}
 .phone .app{padding-bottom:calc(var(--unit)*2.4)}
+
+.seg--entry{min-height:0}

@@ -93,7 +93,6 @@ export function TimelineView() {
         {FILTERS.map(([k, n]) => <button key={k} className={`chip ${filter === k ? 'on' : ''}`} data-filter={k} onClick={() => patch({ filter: k })}>{n}</button>)}
       </div>
       <div className="ruler" aria-label={`${pet.name}的成长时间轴，越往上越成长`}>
-        <p className="ruler__top">↑ 越往上，{pet.name}越大</p>
         <section className="seg seg--entry"><div className="seg__ruler"><span className="seg__tick" /></div><div className="seg__body"><button className="ruler-entry" aria-label="添加成长记录" onClick={() => setAdding(true)}>＋</button></div></section>
         {rows}
       </div>

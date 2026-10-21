@@ -29,7 +29,6 @@ export function Home() {
     <div className="sd-card card album">
       <h3>成长相册<small>灵感照片 · 示例</small></h3>
       <div className="collage"><Photo cls="a" src="cat.jpg" alt="猫咪的好奇瞬间" /><Photo cls="b" src="dog.jpg" alt="狗狗的户外时光" /><Photo cls="c" src="cat-memory.jpg" alt="猫咪的午后" /></div>
-      <div className="album-footer"><span>♡ 小小瞬间，慢慢收藏</span><span>OUR MEMORIES</span></div>
     </div>
     <WeightPanel />
     <CareCompanion showActions={false} />

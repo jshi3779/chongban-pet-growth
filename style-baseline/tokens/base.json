@@ -1,345 +1,571 @@
 {
   "color.primary.50": {
-    "value": "#EDF3FF",
+    "value": "#eaf8f8",
     "type": "color",
     "group": "主色",
     "desc": "主色浅底：标签底、选中态浅背景",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 Start Tracking 按钮浅蓝底/描边" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.primary.100": {
-    "value": "#D8E6FE",
+    "value": "#c9f1ee",
     "type": "color",
     "group": "主色",
     "desc": "主色浅阶：进度条底、次级强调背景",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 GPS 状态胶囊浅蓝底" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.primary.300": {
-    "value": "#8AB1FC",
+    "value": "#71d8d0",
     "type": "color",
     "group": "主色",
     "desc": "主色中阶：轨迹线辅助、图标默认色",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 地图轨迹线浅段" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.primary.500": {
-    "value": "#3D7BFA",
+    "value": "#1ab7ad",
     "type": "color",
     "group": "主色",
     "desc": "品牌主色：主按钮、Tab 选中、GPS 轨迹、图标圈（用户确认锁定）",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 底部 Tab 选中胶囊 / 屏2 主按钮" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.primary.700": {
-    "value": "#1F5CD9",
+    "value": "#087e78",
     "type": "color",
     "group": "主色",
     "desc": "主色深阶：hover/按压态、强调文字",
-    "source": { "type": "ai-default", "reference": "shot-01.png", "element": "由 primary-500 加深推导，截图未直接出现" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.success": {
-    "value": "#34C759",
+    "value": "#12806b",
     "type": "color",
     "group": "语义色",
     "desc": "成功/在线状态：Online 绿点、完成勾选",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1/屏3 Online 状态点、屏2 Device Connected 勾选圈" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.warning": {
-    "value": "#F5A623",
+    "value": "#a56c0a",
     "type": "color",
     "group": "语义色",
     "desc": "警示/活力橙：渐变数据条端色",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Sleep 渐变进度条橙端" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.error": {
-    "value": "#FF4D5C",
+    "value": "#bd4153",
     "type": "color",
     "group": "语义色",
     "desc": "危险/紧急：Lost Mode 描边、通知红点",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 Activate Lost Mode 按钮、屏1 铃铛红点" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.info": {
-    "value": "#3D7BFA",
+    "value": "#087e78",
     "type": "color",
     "group": "语义色",
     "desc": "信息提示，与品牌主色同源",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 GPS Active 图标圈" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.violet": {
-    "value": "#8B5CF6",
+    "value": "#a665c6",
     "type": "color",
     "group": "语义色",
     "desc": "数据可视化辅助紫：渐变条起点、Activity 柱状图",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Sleep 渐变条紫端 / Activity 紫色柱状图" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.text.primary": {
-    "value": "#1A1D21",
+    "value": "#24282b",
     "type": "color",
     "group": "中性色",
     "desc": "主文字：标题、数值、Tab 选中",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Today's Summary / 屏2 Is Ready" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.text.secondary": {
-    "value": "#5B6168",
+    "value": "#596166",
     "type": "color",
     "group": "中性色",
     "desc": "次要文字：卡片副标题、说明行",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Scottish Fold / 屏3 Aurora, Illinois, USA" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.text.tertiary": {
-    "value": "#8A8F98",
+    "value": "#687278",
     "type": "color",
     "group": "中性色",
     "desc": "三级文字：时间戳、标签、占位符",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 View all / 2 min ago Updated" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.text.disabled": {
-    "value": "#C5C9CE",
+    "value": "#b8c1c5",
     "type": "color",
     "group": "中性色",
     "desc": "禁用文字",
-    "source": { "type": "ai-default", "reference": "shot-01.png", "element": "截图无禁用态，按中性阶推导" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.bg.page": {
-    "value": "#F2F3F5",
+    "value": "#ffffff",
     "type": "color",
     "group": "中性色",
     "desc": "页面底色：浅灰，卡片浮于其上",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 卡片间露出的页面底色" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.bg.card": {
-    "value": "#FFFFFF",
+    "value": "#ffffff",
     "type": "color",
     "group": "中性色",
     "desc": "卡片/面板底色",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "全部白卡与底部抽屉" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.bg.mask": {
-    "value": "rgba(0,0,0,0.45)",
+    "value": "rgba(26,37,39,.38)",
     "type": "color",
     "group": "中性色",
     "desc": "弹窗遮罩",
-    "source": { "type": "ai-default", "reference": "shot-01.png", "element": "截图无弹窗态，按移动端惯例" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.border.base": {
-    "value": "#E8EAED",
+    "value": "#dce5e6",
     "type": "color",
     "group": "中性色",
     "desc": "控件描边：输入框、次按钮",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 Lost Mode 描边之外的一般描边推导" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "color.border.divider": {
-    "value": "#EEF0F3",
+    "value": "#edf1f2",
     "type": "color",
     "group": "中性色",
     "desc": "分隔线：卡片内列表分隔",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 状态清单行间分隔" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "font.family-base": {
     "value": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
     "type": "font",
     "group": "字体",
     "desc": "基础字体族：iOS 系统字体优先",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "全图字形特征（SF Pro 系）" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "全图字形特征（SF Pro 系）"
+    }
   },
   "font.family-number": {
     "value": "\"SF Pro Display\", -apple-system, BlinkMacSystemFont, sans-serif",
     "type": "font",
     "group": "字体",
     "desc": "数值展示字体：统计数字用 Display 字重",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 81:42 / 3.2 km 数字形态" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏1 81:42 / 3.2 km 数字形态"
+    }
   },
   "font.size.caption": {
-    "value": 11,
+    "value": 12,
     "type": "font",
     "group": "字体",
     "desc": "辅助说明：Tab 标签、单位、时间戳，行高 1.4",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Today's walk / 底部 Tab 文字" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "font.size.body": {
-    "value": 13,
+    "value": 14,
     "type": "font",
     "group": "字体",
     "desc": "正文：说明文字、列表副文，行高 1.5",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 状态清单说明文字" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "font.size.h3": {
-    "value": 15,
+    "value": 16,
     "type": "font",
     "group": "字体",
     "desc": "小标题：卡片标题、按钮文字，行高 1.5",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Maplewood / 屏2 按钮文字" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "font.size.h2": {
-    "value": 18,
+    "value": 20,
     "type": "font",
     "group": "字体",
     "desc": "中标题：宠物名、区块标题，行高 1.4",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Tilda / Today's Summary" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "font.size.h1": {
-    "value": 28,
+    "value": 24,
     "type": "font",
     "group": "字体",
     "desc": "大标题：引导页主题句，行高 1.3",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 Tida's Tracker / Is Ready" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "font.weight-regular": {
     "value": 400,
     "type": "font",
     "group": "字体",
     "desc": "常规字重：正文与说明",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "副标题与说明文字" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "副标题与说明文字"
+    }
   },
   "font.weight-medium": {
     "value": 600,
     "type": "font",
     "group": "字体",
     "desc": "中强调字重：卡片标题、按钮（截图 semibold 风格）",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 Maplewood / 屏3 Speed 数值" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏1 Maplewood / 屏3 Speed 数值"
+    }
   },
   "font.weight-bold": {
     "value": 700,
     "type": "font",
     "group": "字体",
     "desc": "强强调字重：大标题、统计数值",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 Is Ready / 屏1 81:42" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏2 Is Ready / 屏1 81:42"
+    }
   },
   "space.xs": {
     "value": 4,
     "type": "dimension",
     "group": "间距",
     "desc": "微间距：图标与文字间隙",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "状态点与文字间隙" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "状态点与文字间隙"
+    }
   },
   "space.sm": {
     "value": 8,
     "type": "dimension",
     "group": "间距",
     "desc": "小间距：胶囊内距、组内行距",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "Online 胶囊内距" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "Online 胶囊内距"
+    }
   },
   "space.md": {
     "value": 12,
     "type": "dimension",
     "group": "间距",
     "desc": "中间距：卡片间距、列表行距",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 统计卡间距" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏1 统计卡间距"
+    }
   },
   "space.lg": {
     "value": 16,
     "type": "dimension",
     "group": "间距",
     "desc": "标准间距：页面左右边距、卡片内距",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 页面边距" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏1 页面边距"
+    }
   },
   "space.xl": {
     "value": 20,
     "type": "dimension",
     "group": "间距",
     "desc": "大间距：区块间距",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 区块间隔" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏1 区块间隔"
+    }
   },
   "space.2xl": {
     "value": 24,
     "type": "dimension",
     "group": "间距",
     "desc": "超大间距：抽屉内距、引导页段落距",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 底部抽屉内距" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏3 底部抽屉内距"
+    }
   },
   "space.3xl": {
     "value": 32,
     "type": "dimension",
     "group": "间距",
     "desc": "段落间距：引导页标题与插画间",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 标题与插画间距" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏2 标题与插画间距"
+    }
   },
   "radius.sm": {
     "value": 8,
     "type": "dimension",
     "group": "圆角",
     "desc": "小圆角：标签、小按钮",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 状态胶囊" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "radius.md": {
-    "value": 12,
+    "value": 10,
     "type": "dimension",
     "group": "圆角",
     "desc": "中圆角：输入框、缩略卡",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 地图缩略图" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "radius.lg": {
-    "value": 16,
+    "value": 12,
     "type": "dimension",
     "group": "圆角",
     "desc": "大圆角：标准卡片",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 统计卡" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "radius.xl": {
-    "value": 20,
+    "value": 16,
     "type": "dimension",
     "group": "圆角",
     "desc": "特大圆角：主内容卡、抽屉顶部",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 宠物大卡 / 屏3 抽屉顶部" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "radius.full": {
     "value": 999,
     "type": "dimension",
     "group": "圆角",
     "desc": "胶囊：主按钮、Tab 选中态、状态胶囊",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏2 Start Tracking 按钮 / 屏1 Tab 选中胶囊" }
+    "source": {
+      "type": "user-screenshot",
+      "reference": "shot-01.png",
+      "element": "屏2 Start Tracking 按钮 / 屏1 Tab 选中胶囊"
+    }
   },
   "shadow.sm": {
-    "value": "0 2px 6px rgba(26,29,33,0.05)",
+    "value": "0 1px 3px rgba(24,49,52,.04)",
     "type": "shadow",
     "group": "阴影",
     "desc": "轻投影：静态卡片",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏1 统计卡边缘微投影" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "shadow.md": {
-    "value": "0 4px 12px rgba(26,29,33,0.08)",
+    "value": "0 3px 10px rgba(24,49,52,.06)",
     "type": "shadow",
     "group": "阴影",
     "desc": "中投影：浮动胶囊、Tab 选中",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 Tilda 状态胶囊" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "shadow.lg": {
-    "value": "0 8px 24px rgba(26,29,33,0.10)",
+    "value": "0 6px 20px rgba(24,49,52,.08)",
     "type": "shadow",
     "group": "阴影",
     "desc": "大投影：底部抽屉、浮层",
-    "source": { "type": "user-screenshot", "reference": "shot-01.png", "element": "屏3 底部抽屉上缘投影" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "shadow.xl": {
-    "value": "0 16px 40px rgba(26,29,33,0.12)",
+    "value": "0 12px 32px rgba(24,49,52,.12)",
     "type": "shadow",
     "group": "阴影",
     "desc": "重投影：模态弹窗（截图未出现，保留备用）",
-    "source": { "type": "ai-default", "reference": "shot-01.png", "element": "截图无模态，按阶梯推导" }
+    "source": {
+      "type": "user-request",
+      "reference": "https://play.google.com/store/apps/details?id=com.m11pets.elevenpets",
+      "element": "11pets参考视觉：白底、薄荷信息区、扁平列表与清晰层级"
+    }
   },
   "motion.duration-fast": {
     "value": 150,
     "type": "duration",
     "group": "动效",
     "desc": "快速反馈：按压、描边切换",
-    "source": { "type": "ai-default", "reference": "", "element": "静态截图无法采样动效，按活泼年轻调性取标准值" }
+    "source": {
+      "type": "ai-default",
+      "reference": "",
+      "element": "静态截图无法采样动效，按活泼年轻调性取标准值"
+    }
   },
   "motion.duration-base": {
     "value": 250,
     "type": "duration",
     "group": "动效",
     "desc": "常规过渡：卡片入场、展开",
-    "source": { "type": "ai-default", "reference": "", "element": "同上" }
+    "source": {
+      "type": "ai-default",
+      "reference": "",
+      "element": "同上"
+    }
   },
   "motion.duration-slow": {
     "value": 400,
     "type": "duration",
     "group": "动效",
     "desc": "慢速动效：引导页入场、地图轨迹动画",
-    "source": { "type": "ai-default", "reference": "", "element": "同上" }
+    "source": {
+      "type": "ai-default",
+      "reference": "",
+      "element": "同上"
+    }
   },
   "motion.ease-standard": {
     "value": "cubic-bezier(0.4, 0, 0.2, 1)",
     "type": "duration",
     "group": "动效",
     "desc": "标准缓动曲线",
-    "source": { "type": "ai-default", "reference": "", "element": "同上" }
+    "source": {
+      "type": "ai-default",
+      "reference": "",
+      "element": "同上"
+    }
+  },
+  "color.nav.active": {
+    "value": "#b13c99",
+    "type": "color",
+    "group": "11pets参考",
+    "desc": "用户指定UI风格重构",
+    "source": {
+      "type": "user-request",
+      "reference": "11pets official Google Play screenshots"
+    }
+  },
+  "color.surface.muted": {
+    "value": "#f5f7f7",
+    "type": "color",
+    "group": "11pets参考",
+    "desc": "用户指定UI风格重构",
+    "source": {
+      "type": "user-request",
+      "reference": "11pets official Google Play screenshots"
+    }
+  },
+  "color.shell": {
+    "value": "#e9eeef",
+    "type": "color",
+    "group": "11pets参考",
+    "desc": "用户指定UI风格重构",
+    "source": {
+      "type": "user-request",
+      "reference": "11pets official Google Play screenshots"
+    }
   }
 }

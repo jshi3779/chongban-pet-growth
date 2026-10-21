@@ -40,7 +40,7 @@ export function seedPosts(): Post[] {
 export function seed(): AppState {
   const d = (n: number) => shift(-n), f = (n: number) => shift(n);
   return {
-    cur: 'p1', tab: 'home', filter: 'all', comm: 'recommend', posts: seedPosts(), cal: calInit(), region: { city: '', district: '' }, memberInterest: false,
+    cur: 'p1', tab: 'home', filter: 'all', comm: 'recommend', posts: seedPosts(), cal: calInit(), region: { city: '', district: '' },
     pets: [{ id: 'p1', name: '年糕', type: '猫', breed: '英短蓝猫', gender: '♂', birthday: d(420) }],
     records: [
       { id: 1, petId: 'p1', kind: 'milestone', date: d(420), name: '来到这个世界', note: '出生啦' },

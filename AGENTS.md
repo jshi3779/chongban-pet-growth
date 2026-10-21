@@ -32,12 +32,12 @@ npm run build            # 类型检查 + 构建
 
 出现硬编码报错即视为不通过，须修正后重新输出。
 
-## 备注
+## 当前设计（2026-10-21）
 
-- 当前存在两套风格基线：`style-baseline/theme.css`（原追踪蓝 `#3D7BFA`）与
-  `ui-ux-pro-max-design-system.md`（扁平卡通橙 `#FF7A59`）。落地新页面时，
-  默认以 `ui-ux-pro-max-design-system.md` 的扁平卡通为准，并将对应色值同步进 `theme.css` 变量。
-- 现状（v1.2）：`theme.css` 已按 POMU 暖色黏土风重设：奶油白 `#FFF8EC`（页面）、杏橙 `#F6A15F`（选中/高亮）、深可可 `#39271F`（文字与主操作）、鼠尾草绿 `#8FB59B` 与灰调石色（点缀），圆角整体加大（xl=32）。
-  规则：深可可 = 主操作，杏橙 = 选中；黏土质感阴影与宠物角色见 `src/styles/warm.css`（含未覆盖样式标注）。
-  `ui-ux-pro-max-design-system.md` 原文仍未提供，扁平卡通橙 `#FF7A59` 已被本次暖色方案取代。
-- 在线预览：https://jshi3779.github.io/chongban-pet-growth/（GitHub Actions 构建并部署 `dist/`）。
+用户已明确要求参考11pets的UI重构，替代之前的POMU暖色黏土方案。当前使用白底、浅青信息区、灰色列表卡、洋红选中态导航、低阴影和小圆角。来源与范围见 docs/ui-11pets.md。
+
+颜色和尺寸定义仍在 style-baseline/theme.css；tokens/base.json 与 manifest.json 同步更新。覆盖层为 src/styles/petcare.css，放在样式入口最后加载。禁止重新启用旧黏土内阴影和厚重手机外框。旧的 ui-ux-pro-max-design-system.md 仍未提供，不是当前实现依据。
+
+保留四个现有页面、相册在宠物资料下方且紧邻体重卡、统一体重录入弹窗、导出图标、本地存储格式。Plus功能已按用户要求移除。
+
+预览：https://jshi3779.github.io/chongban-pet-growth/

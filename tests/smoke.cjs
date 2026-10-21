@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
  const page=await browser.newPage({viewport:{width:390,height:844}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(process.env.BASE_URL||'http://localhost:4173/');
- assert.equal(await page.locator('main > :first-child').getAttribute('class'),'pethead');
+ assert.equal(await page.getByRole('heading',{name:'我的宠物',exact:true}).count(),1);
  assert.equal(await page.locator('.album + [data-weight-panel]').count(),1);
  const state=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('petgrowth.v1')));
  const tab=async t=>page.locator('.sd-tabbar [data-tab="'+t+'"]').click();
@@ -23,7 +23,6 @@ const assert = require('node:assert/strict');
  await page.locator('[data-act="share-growth"]').click();assert.match(await page.locator('[name="title"]').inputValue(),/年糕的成长小记/);await page.locator('[data-close]').click();
  await page.locator('[data-act="find-nearby"]').click();assert.equal(await page.locator('[data-comm="nearby"]').getAttribute('class'),'on');await tab('home');
  await page.locator('[data-act="view-health"]').click();assert.equal((await state()).tab,'calendar');await tab('home');
- await page.locator('summary').filter({hasText:'宠伴 Plus'}).click();await page.getByRole('button',{name:'我感兴趣',exact:true}).click();await page.reload();assert.equal((await state()).memberInterest,true);
  await tab('community');await page.locator('[data-comm="nearby"]').click();
  await page.locator('[name="city"]').fill('上海');await page.locator('[name="district"]').fill('徐汇');await page.getByRole('button',{name:'保存地区'}).click();assert.equal(await page.locator('[data-post]').count(),2);
  await page.getByRole('button',{name:'猫',exact:true}).click();assert.equal(await page.locator('[data-post]').count(),1);
@@ -48,5 +47,5 @@ const assert = require('node:assert/strict');
   await page.setViewportSize({width,height:900});
   for(const t of ['home','calendar','timeline','community']){await tab(t);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'overflow '+width+' '+t);}
  }
- assert.deepEqual(errors,[]);await browser.close();console.log('PASS: editable quick entry, persistence, export, membership interest, regional filtering/publishing, likes, pet switching, original calendar/timeline/delete, 4 widths, no runtime errors');
+ assert.deepEqual(errors,[]);await browser.close();console.log('PASS: editable quick entry, persistence, export, regional filtering/publishing, likes, pet switching, original calendar/timeline/delete, 4 widths, no runtime errors');
 })().catch(e=>{console.error(e);process.exit(1)});

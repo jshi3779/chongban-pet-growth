@@ -9,16 +9,12 @@ export function Home() {
   const { s, pet, patch, openPet } = useApp();
   return <>
 
+    <header className="page-title"><h1>我的宠物</h1><button className="add-pet-link" data-act="addpet" aria-label="添加宠物" onClick={openPet}>＋ 添加宠物</button></header>
     <section className="pethead">
-      <div className="pethead__row">
-        <span className="bigface"><Mascot type={pet.type} label={`${pet.name}的黏土形象`} /></span>
-        {s.pets.filter(q => q.id !== pet.id).map(q => <button key={q.id} className="face" data-pet={q.id} aria-label={`切换到${q.name}`} onClick={() => patch({ cur: q.id })}>{EMOJI[q.type] || '🐾'}</button>)}
-        <button className="face add" data-act="addpet" aria-label="添加宠物" onClick={openPet}>＋</button>
-      </div>
-      <h2>{pet.name}</h2>
-      <div className="meta"><span>{pet.type} · {pet.breed || '未填品种'}</span><span>{pet.gender === '♀' ? '女孩' : '男孩'}</span><span>{pet.birthday ? age(pet.birthday) : '年龄未填'}</span><span>🎂 {pet.birthday || '生日未填'}</span></div>
+      <span className="bigface"><Mascot type={pet.type} label={`${pet.name}的宠物形象`} /></span>
+      <div className="pethead__info"><h2>{pet.name} <small>{pet.gender === '♀' ? '♀' : '♂'}</small></h2><div className="meta"><span>{pet.breed || pet.type}</span><span>{pet.birthday ? age(pet.birthday) : '年龄未填'}</span><span>🎂 {pet.birthday || '生日未填'}</span></div></div>
     </section>
-    <p className="product-promise">记录成长，理清照护，在同城遇见懂你的人。</p>
+    {s.pets.length > 1 && <div className="pets" aria-label="切换宠物">{s.pets.filter(q => q.id !== pet.id).map(q => <button key={q.id} className="chip" data-pet={q.id} onClick={() => patch({ cur: q.id })}>{EMOJI[q.type] || '🐾'} {q.name}</button>)}</div>}
     <div className="sd-card card album">
       <h3>成长相册<small>灵感照片 · 示例</small></h3>
       <div className="collage"><Photo cls="a" src="cat.jpg" alt="猫咪的好奇瞬间" /><Photo cls="b" src="dog.jpg" alt="狗狗的户外时光" /><Photo cls="c" src="cat-memory.jpg" alt="猫咪的午后" /></div>

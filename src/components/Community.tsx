@@ -30,6 +30,7 @@ export function Community() {
   const list = nearby ? nearbyPosts(s.posts, s.region.city, s.region.district, petType) : s.posts;
   const cols = [list.filter((_, i) => i % 2 === 0), list.filter((_, i) => i % 2 === 1)];
   return <>
+    <header className="page-title"><h1>宠友社区</h1></header>
     <nav className="commnav" aria-label="社区分类">
       <button className={!nearby ? 'on' : ''} data-comm="recommend" onClick={() => patch({ comm: 'recommend' })}>推荐</button>
       <button className={nearby ? 'on' : ''} data-comm="nearby" onClick={() => patch({ comm: 'nearby' })}>附近宠友</button>

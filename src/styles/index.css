@@ -1,9 +1,9 @@
-/* 样式入口：先加载设计基线，再加载页面样式（STYLE-CONTRACT 加载顺序） */
+/* 先加载设计Token，再加载功能布局，最后应用11pets参考视觉。 */
 @import "../../style-baseline/theme.css";
 @import "./app.css";
 @import "./checkin.css";
 @import "./phone.css";
 @import "./community.css";
-@import "./warm.css";
 @import "./timeline.css";
 @import "./product.css";
+@import "./petcare.css";

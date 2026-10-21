@@ -5,12 +5,12 @@ export interface Api {
   s: AppState;
   pet: Pet;
   patch: (p: Partial<AppState>) => void;
-  openRecord: (kind: Kind, date?: string) => void;
+  openRecord: (kind: Kind, date?: string, value?: string) => void;
   openPet: () => void;
   del: (id: number) => void;
   soon: (name: string) => void;
   openPick: (date: string) => void;
-  openPost: () => void;
+  openPost: (draft?: { title: string; body: string }) => void;
   openDetail: (id: number) => void;
   like: (id: number) => void;
 }

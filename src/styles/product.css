@@ -1,0 +1,17 @@
+/* ⚠️ 未覆盖样式：照护摘要与地区表单，使用兜底 Token --space-md / --radius-lg，组合既有 sd-card / sd-row / sd-btn。 */
+.companion h3{margin-top:var(--space-md)}
+.companion p,.product-details p{line-height:var(--line-height-body);overflow-wrap:anywhere}
+.product-note{color:var(--color-text-secondary);font-size:var(--font-size-caption);margin:var(--space-sm) 0 var(--space-md)}
+.product-actions{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-md)}
+.product-actions .sd-btn{height:auto;min-height:var(--space-touch);white-space:normal}
+.product-details{margin-top:var(--space-lg)}
+.product-details summary{cursor:pointer;font-weight:var(--font-weight-medium);min-height:var(--space-touch);display:list-item}
+.region-form{display:grid;gap:var(--space-sm);margin-bottom:var(--space-lg)}
+.region-form label{display:grid;gap:var(--space-xs);min-width:0}
+.region-form .sd-input{width:100%;min-width:0}
+.region-filters{display:flex;gap:var(--space-sm);flex-wrap:wrap;margin-bottom:var(--space-lg)}
+.post__status{display:block;color:var(--color-text-secondary);font-size:var(--font-size-caption);padding:var(--space-xs) var(--space-sm)}
+.product-promise{font-size:var(--font-size-body);color:var(--color-text-secondary);margin:0 0 var(--space-lg)}
+/* ⚠️ 未覆盖样式：窄屏手机容器，使用兜底 Token --space-xl / --unit；保留桌面外框，限制到可用视口。 */
+.stage{min-width:0;width:100%;padding:min(var(--space-xl),2vw)}
+.phone{min-width:0;width:min(calc(var(--unit)*8.125),100%);height:min(calc(var(--unit)*17.5),calc(100dvh - var(--space-xl)*2))}

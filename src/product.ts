@@ -47,3 +47,21 @@ export function nearbyPosts(posts: Post[], city: string, district: string, petTy
     && (!district.trim() || districtName(p.district) === districtName(district))
     && (petType === '全部' || p.petType === petType));
 }
+
+/** Three calendar months ending in the selected month; Monday-first columns. */
+export function healthActivity(s: AppState, pid: string, year: number, month: number, asOf = today()) {
+  const from = new Date(year, month - 2, 1, 12);
+  const to = new Date(year, month + 1, 0, 12);
+  const format = (d: Date) => ymd(d.getFullYear(), d.getMonth(), d.getDate());
+  const start = format(from), end = format(to);
+  const counts: Record<string, number> = {};
+  s.records.filter(r => r.petId === pid && (r.kind === 'vaccine' || r.kind === 'deworm') && r.date >= start && r.date <= end && r.date <= asOf)
+    .forEach(r => { counts[r.date] = (counts[r.date] || 0) + 1; });
+  const cells: (string | null)[] = Array((from.getDay() + 6) % 7).fill(null);
+  const cursor = new Date(from);
+  while (cursor <= to) { cells.push(format(cursor)); cursor.setDate(cursor.getDate() + 1); }
+  while (cells.length % 7) cells.push(null);
+  const months = [0, 1, 2].map(i => { const d = new Date(year, month - 2 + i, 1); return { year: d.getFullYear(), month: d.getMonth() + 1 }; });
+  const total = Object.values(counts).reduce((a, b) => a + b, 0);
+  return { start, end, cells, counts, months, total };
+}

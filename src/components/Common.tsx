@@ -22,8 +22,8 @@ export function PetAvatar({ pet }: { pet: Pet }) {
 export function PetSwitch() {
   const { s, pet, patch } = useApp();
   return <div className="pets" aria-label="切换宠物">
-    {s.pets.map(p => <button key={p.id} className={`chip pet-chip ${p.id === pet.id ? 'on' : ''}`} data-pet={p.id} aria-label={`切换到${p.name}`} aria-pressed={p.id === pet.id} onClick={() => patch({ cur: p.id })}>
-      <PetAvatar pet={p} /><span>{p.name}</span>
+    {s.pets.map(p => <button key={p.id} className={`chip pet-chip ${p.id === pet.id ? 'on' : ''}`} data-pet={p.id} aria-label={`切换到${p.name}`} title={p.name} aria-pressed={p.id === pet.id} onClick={() => patch({ cur: p.id })}>
+      <PetAvatar pet={p} />
     </button>)}
   </div>;
 }

@@ -3,19 +3,14 @@ import { useApp } from '../ctx';
 import { KIND, calInit, recsOf, reminders, today, ymd } from '../utils';
 import { isHealth, withDemo } from '../demo';
 import type { PetRecord } from '../types';
+import { HealthActivity } from './HealthActivity';
+import { healthActivity } from '../product';
 import { PetSwitch } from './Common';
 
 const WEEK = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
 const parse = (d: string) => new Date(`${d}T00:00:00`);
 const fmt = (d: Date) => ymd(d.getFullYear(), d.getMonth(), d.getDate());
-const addDays = (d: string, n: number) => { const t = parse(d); t.setDate(t.getDate() + n); return fmt(t); };
-
-function monday(d: string) {
-  const t = parse(d); const w = (t.getDay() + 6) % 7;
-  t.setDate(t.getDate() - w); return fmt(t);
-}
-
 export function CalendarView() {
   const { s: real, pet, patch, openHistory } = useApp();
   const { st: s, demo } = withDemo(real, pet.id);
@@ -28,16 +23,17 @@ export function CalendarView() {
   all.forEach(r => { (byDay[r.date] = byDay[r.date] || []).push(r); if (r.next) dueDay[r.next] = r; });
 
   const go = (d: string) => { const t = parse(d); patch({ cal: { y: t.getFullYear(), m: t.getMonth(), sel: d } }); };
-  const start = monday(sel);
-  const days = Array.from({ length: 7 }, (_, i) => addDays(start, i));
+  const selectActivity = (d: string) => patch({ cal: { ...c, sel: d } });
 
   // 图一风格的打卡列表：待办（来自到期提醒）在前，已完成记录在后
   const rem = reminders(s, pet.id);
-  const y0 = parse(sel).getFullYear(), m0 = parse(sel).getMonth();
+  const y0 = c.y, m0 = c.m;
   const lead = (new Date(y0, m0, 1).getDay() + 6) % 7, dim = new Date(y0, m0 + 1, 0).getDate();
   const shiftMonth = (n: number) => { const t = new Date(y0, m0 + n, 1); go(fmt(t)); };
-  const step = (n: number) => (open ? shiftMonth(n) : go(addDays(sel, 7 * n)));
-  const monthLabel = `${parse(sel).getFullYear()}年${parse(sel).getMonth() + 1}月`;
+  const step = (n: number) => shiftMonth(n * (open ? 1 : 3));
+  const range = healthActivity(s, pet.id, y0, m0);
+  const first = range.months[0], last = range.months[2];
+  const monthLabel = open ? `${y0}年${m0 + 1}月` : first.year === last.year ? `${last.year}年${first.month}—${last.month}月` : `${first.year}.${first.month}—${last.year}.${last.month}`;
 
 
   return (
@@ -46,12 +42,12 @@ export function CalendarView() {
       <div className="caltop">
         <div className="calendar-heading"><h2>健康日历</h2><button className="tool-icon" aria-label={`全部健康记录（${all.length}条）`} title="全部健康记录" onClick={openHistory}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H5V3h1m9 0v5h4M8 12h8M8 16h8" /></svg></button></div>
         <div className="monthpill">
-          <button className="x" aria-label={open ? '上个月' : '上一周'} data-calnav="-1" onClick={() => step(-1)}>‹</button>
+          <button className="x" aria-label={open ? '上个月' : '前3个月'} data-calnav="-1" onClick={() => step(-1)}>‹</button>
           <span>{monthLabel}</span>
           <button className={`x expand ${open ? 'open' : ''}`} aria-label={open ? '收起月历' : '展开整月'} aria-expanded={open} data-calexpand onClick={() => setOpen(v => !v)}>
             <svg viewBox="0 0 24 24" className="chev"><path d="M6 9l6 6 6-6" /></svg>
           </button>
-          <button className="x" aria-label={open ? '下个月' : '下一周'} data-calnav="1" onClick={() => step(1)}>›</button>
+          <button className="x" aria-label={open ? '下个月' : '后3个月'} data-calnav="1" onClick={() => step(1)}>›</button>
         </div>
       </div>
 
@@ -73,19 +69,7 @@ export function CalendarView() {
           <div className="legend"><i className="dot vaccine" />疫苗 <i className="dot deworm" />驱虫 <i className="dot due" />到期日</div>
         </div>
       ) : (
-        <div className="weekstrip" role="tablist">
-          {days.map((d, i) => {
-            const n = (byDay[d] || []).length, t = parse(d);
-            return (
-              <button key={d} role="tab" aria-selected={d === sel} className={`wd ${d === sel ? 'sel' : ''} ${d === today() ? 'today' : ''}`} data-day={d} onClick={() => go(d)}>
-                <small>{WEEK[i]}</small>
-                <b>{t.getDate()}</b>
-                <em>{n ? `${n} 条` : (dueDay[d] ? '到期' : '—')}</em>
-              </button>
-            );
-          })}
-        </div>
-  
+        <HealthActivity s={s} pid={pet.id} year={y0} month={m0} selected={sel} onSelect={selectActivity} demo={demo} />
       )}
 
 

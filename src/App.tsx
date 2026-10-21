@@ -79,10 +79,13 @@ export default function App() {
           <main id="view" key={s.tab}><View /></main>
           </div>
           <nav className="sd-tabbar" aria-label="主导航">
-            {TABS.map(t => (
+            {TABS.map((t, i) => (
+              <div className="nav-slot" key={t.id}>
+              {i === 2 && <button className="nav-publish" data-act="newpost" aria-label="发布帖子" title="发布帖子" onClick={() => api.openPost()}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button>}
               <button key={t.id} className={`sd-tabbar__item ${s.tab === t.id ? 'on' : ''}`} data-tab={t.id} aria-label={t.label} aria-current={s.tab === t.id ? 'page' : undefined} onClick={() => go(t.id)}>
                 <svg viewBox="0 0 24 24" aria-hidden="true">{t.icon}</svg>
               </button>
+              </div>
             ))}
           </nav>
           <Sheet sheet={sheet} onClose={() => setSheet(null)} onSubmit={submit} />

@@ -31,3 +31,12 @@
 .phone .app{padding-bottom:calc(var(--unit)*2.4)}
 
 .seg--entry{min-height:0}
+
+.calendar-all{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-xs);min-height:var(--space-touch);padding:0 var(--space-sm);font-size:var(--font-size-caption);font-weight:var(--font-weight-medium);color:var(--color-profile-dark)}
+.calendar-all svg{width:var(--space-lg);height:var(--space-lg);fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.nav-slot{display:contents}
+.phone .nav-publish{display:grid;place-items:center;width:var(--space-touch-lg);height:var(--space-touch-lg);flex:none;border-radius:var(--radius-full);color:var(--color-profile-paper);background:linear-gradient(135deg,var(--color-profile-light),var(--color-profile-blue));box-shadow:var(--shadow-sm)}
+
+.phone .sd-tabbar__item,.phone[data-page="home"] .sd-tabbar__item,.phone .sd-tabbar__item.on,.phone[data-page="home"] .sd-tabbar__item.on{flex:1 1 0;min-width:0;padding:0}
+

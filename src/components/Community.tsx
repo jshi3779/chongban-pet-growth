@@ -53,6 +53,5 @@ export function Community() {
     </section>}
     {list.length ? <div className="feed">{cols.map((c, i) => <div key={i} className="feed__col">{c.map(p => <Card key={p.id} p={p} />)}</div>)}</div>
       : <div className="empty">{s.region.city ? '暂无匹配日常，试试清空区县或切换宠物类型，也可以写下第一条。' : '先选城市，再遇见同城日常。'}</div>}
-    <button className="fab" data-act="newpost" aria-label="发布帖子" onClick={() => openPost()}>＋</button>
   </>;
 }

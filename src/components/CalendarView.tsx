@@ -73,7 +73,7 @@ export function CalendarView() {
       )}
 
 
-      <div className="sec calendar-heading"><span>待办提醒</span><button className="tool-icon" aria-label={`全部健康记录（${all.length}条）`} onClick={openHistory}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H5V3h1m9 0v5h4M8 12h8M8 16h8" /></svg></button>{demo && <span className="demotag demotag--lg">示例日程</span>}</div>
+      <div className="sec calendar-heading"><span>待办提醒</span><button className="calendar-all" aria-label={`全部健康记录（${all.length}条）`} onClick={openHistory}>全部<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></button></div>
       <div className="chk">
         {rem.map(({ r, left }) => (
           <button key={`u${r.id}`} className="chkrow" onClick={() => go(r.next as string)}>

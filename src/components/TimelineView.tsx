@@ -80,7 +80,7 @@ export function TimelineView() {
     <>
       <PetSwitch />
       <header className="growth">
-        <div className="growth__m"><Mascot type={pet.type} label={`${pet.name}的黏土形象`} /></div>
+        <div className="growth__m"><Mascot type={pet.type} label={`${pet.name}的宠物形象`} /></div>
         <div>
           <h2>{pet.name}的成长尺</h2>
           <p>{pet.birthday ? `${age(pet.birthday)}` : '成长中'}{cur ? ` · 现在 ${cur.value} kg` : ''}{demo && <span className="demotag demotag--lg">示例</span>}</p>

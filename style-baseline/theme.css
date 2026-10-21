@@ -1,46 +1,43 @@
-/* ============================================================
-   UI 样式基线 · theme.css
-   ------------------------------------------------------------
-   由 style-dna 从「宠物追踪 App」截图提取生成（v1.0.0）。
-      下游页面统一 @import 本文件，禁止在页面内硬编码样式值。
-   ⚠️ v1.2：按 POMU 暖色黏土风格重设色板（奶油白 #FFF8EC / 杏橙 #F6A15F / 深可可 #39271F / 鼠尾草绿 #8FB59B），圆角整体加大。
-   加载链：base.json → frontend/frontend-base.json → frontend/app.json
-   ============================================================ */
+/* 宠伴设计基线 v2：用户指定参考11pets官方商店界面；白底、浅青信息区、灰色列表、洋红导航。 */
 
 :root {
+  /* 11pets official-store UI reference, user-requested refresh, 2026-10-21. */
+  --color-nav-active:#b13c99;
+  --color-surface-muted:#f5f7f7;
+  --color-shell:#e9eeef;
   /* ---------- 色彩 · 品牌主色 ---------- */
-  --color-primary-50:#FFF1E2;
-  --color-primary-100:#FDDFC2;
-  --color-primary-300:#F9BE8C;
-  --color-primary-500:#F6A15F;
-  --color-primary-700:#D9803A;
+  --color-primary-50:#eaf8f8;
+  --color-primary-100:#c9f1ee;
+  --color-primary-300:#71d8d0;
+  --color-primary-500:#1ab7ad;
+  --color-primary-700:#087e78;
 
   /* ---------- 色彩 · 语义色 ---------- */
-  --color-success:#8FB59B;
-  --color-warning:#E9B35E;
-  --color-error:#D9715C;
-  --color-info:#F6A15F;
-  --color-violet:#A79DB8;
+  --color-success:#12806b;
+  --color-warning:#a56c0a;
+  --color-error:#bd4153;
+  --color-info:#087e78;
+  --color-violet:#a665c6;
 
   /* ---------- 色彩 · 中性色 ---------- */
-  --color-text-primary:#39271F;
-  --color-text-secondary:#6E5A4E;
-  --color-text-tertiary:#A39385;
-  --color-text-disabled:#D8CCBE;
-  --color-bg-page:#FFF8EC;
-  --color-bg-card:#FFFDF9;
-  --color-bg-mask:rgba(57,39,31,0.45);
-  --color-border-base:#EDE2D3;
-  --color-divider:#F2E9DB;
+  --color-text-primary:#24282b;
+  --color-text-secondary:#596166;
+  --color-text-tertiary:#687278;
+  --color-text-disabled:#b8c1c5;
+  --color-bg-page:#ffffff;
+  --color-bg-card:#ffffff;
+  --color-bg-mask:rgba(26,37,39,.38);
+  --color-border-base:#dce5e6;
+  --color-divider:#edf1f2;
 
   /* ---------- 字体 ---------- */
   --font-family-base:"DejaVu Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-family-number: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-size-caption: 11px;
-  --font-size-body:    13px;
-  --font-size-h3:      15px;
-  --font-size-h2:      18px;
-  --font-size-h1:      28px;
+  --font-size-caption:12px;
+  --font-size-body:14px;
+  --font-size-h3:16px;
+  --font-size-h2:20px;
+  --font-size-h1:24px;
   --font-weight-regular: 400;
   --font-weight-medium:  600;
   --font-weight-bold:    700;
@@ -62,17 +59,17 @@
   --space-touch-lg: 48px;   /* 主按钮 / 胶囊按钮高度 */
 
   /* ---------- 圆角 ---------- */
-  --radius-sm:12px;
-  --radius-md:16px;
-  --radius-lg:24px;
-  --radius-xl:32px;
+  --radius-sm:8px;
+  --radius-md:10px;
+  --radius-lg:12px;
+  --radius-xl:16px;
   --radius-full: 999px;
 
   /* ---------- 阴影 ---------- */
-  --shadow-sm:0 2px 6px rgba(57,39,31,0.05);
-  --shadow-md:0 4px 12px rgba(57,39,31,0.08);
-  --shadow-lg:0 8px 24px rgba(57,39,31,0.10);
-  --shadow-xl:0 16px 40px rgba(57,39,31,0.12);
+  --shadow-sm:0 1px 3px rgba(24,49,52,.04);
+  --shadow-md:0 3px 10px rgba(24,49,52,.06);
+  --shadow-lg:0 6px 20px rgba(24,49,52,.08);
+  --shadow-xl:0 12px 32px rgba(24,49,52,.12);
 
   /* ---------- 动效 ---------- */
   --motion-duration-fast: 150ms;

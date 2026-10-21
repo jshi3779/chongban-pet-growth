@@ -17,12 +17,5 @@ export function CareCompanion() {
         <button className="sd-btn sd-btn--default" data-act="find-nearby" onClick={() => { patch({ comm: 'nearby' }); go('community'); }}>附近宠友</button>
       </div>
     </section>
-    <details className="sd-card card product-details">
-      <summary>宠伴 Plus · 想要更多陪伴？</summary>
-      <p>基础记录、提醒和档案导出持续免费。计划探索家庭协作、云备份、成长纪念册与 AI 辅助录入。</p>
-      <p>拟定调研价 ¥19/月或 ¥128/年，尚未开通付费，也未提供云端或大模型服务。</p>
-      <button className="sd-btn sd-btn--default" aria-pressed={s.memberInterest} onClick={() => patch({ memberInterest: !s.memberInterest })}>{s.memberInterest ? '已标记期待 · 点击取消' : '我感兴趣'}</button>
-      <p className="product-note">仅在本机记录意向，不会扣费或提交联系方式。</p>
-    </details>
   </>;
 }

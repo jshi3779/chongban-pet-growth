@@ -1,0 +1,93 @@
+/* 11pets参考视觉：白底、浅青信息区、灰色任务卡、洋红色导航。颜色均来自设计基线。
+   ⚠️ 未覆盖样式：平面头像和底部工具栏，使用兜底 Token --space-touch / --radius-lg。 */
+:root{
+  --action:var(--color-primary-700);--on-action:var(--color-bg-card);--accent:var(--color-primary-500);--on-accent:var(--color-text-primary);
+  --clay:none;--clay-sm:none;--stone:var(--color-surface-muted);--sage:var(--color-success);--sage-tint:var(--color-primary-50);
+}
+body,.stage{background:var(--color-shell)}
+.phone{border-color:var(--color-border-base);border-width:thin;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);background:var(--color-bg-page)}
+main{padding:var(--space-xl) var(--space-lg) 0}
+.phone[data-page="home"] main,.phone[data-page="calendar"] main,.phone[data-page="timeline"] main{padding-top:var(--space-xl)}
+.page-title{display:flex;align-items:center;justify-content:space-between;gap:var(--space-md);margin-bottom:var(--space-lg)}
+.page-title h1{font-size:var(--font-size-h2);line-height:var(--line-height-h2);font-weight:var(--font-weight-bold);margin:0}
+.add-pet-link{min-height:var(--space-touch);font-size:var(--font-size-body);font-weight:var(--font-weight-medium);color:var(--color-nav-active);white-space:nowrap}
+.sd-card{border:thin solid var(--color-divider);box-shadow:none;background:var(--color-bg-card);padding:var(--space-lg);margin-bottom:var(--space-lg)}
+.card h3{font-weight:var(--font-weight-bold);gap:var(--space-sm)}
+.card h3 small{font-size:var(--font-size-caption);color:var(--color-text-secondary)}
+.pethead{display:flex;align-items:center;gap:var(--space-lg);margin:0 0 var(--space-xl);padding:var(--space-lg);border-radius:var(--radius-lg);background:var(--color-primary-50)}
+.phone[data-page="home"] .pethead{padding-top:var(--space-lg)}
+.pethead__info{flex:1;min-width:0}
+.pethead h2{font-size:var(--font-size-h2);line-height:var(--line-height-h2);margin:0 0 var(--space-xs)}
+.pethead h2 small{color:var(--color-primary-700);font-size:var(--font-size-h3)}
+.pethead .meta{margin:0;gap:var(--space-xs) var(--space-md);font-size:var(--font-size-caption)}
+.bigface{width:calc(var(--unit)*1.3);height:calc(var(--unit)*1.3);border:0;background:var(--color-bg-card);box-shadow:none;display:block;flex:none}
+.mascot{width:100%;height:100%;display:block;filter:none}
+.m-body,.m-ear{fill:var(--color-primary-100)}.m-in{fill:var(--color-primary-300)}.m-eye,.m-nose{fill:var(--color-text-primary)}.m-cheek{fill:var(--color-primary-500);opacity:.25}.m-hi{display:none}.m-stop1,.m-stop2{stop-color:var(--color-primary-100)}
+.sd-btn{border-radius:var(--radius-full);box-shadow:none;font-size:var(--font-size-body);font-weight:var(--font-weight-medium)}
+.sd-btn--primary,.roundbtn,.fab{background:var(--action);color:var(--on-action);box-shadow:none}
+.sd-btn--primary:active{background:var(--color-primary-700)}
+.sd-btn--default{background:var(--color-bg-card);border-color:var(--color-border-base);color:var(--color-text-primary)}
+.sd-input,.panel .sd-input{background:var(--color-bg-card);box-shadow:none;border:thin solid var(--color-border-base);border-radius:var(--radius-md)}
+.sd-input:focus-visible{outline:thin solid var(--color-primary-700);outline-offset:var(--space-xs)}
+.sd-tag{background:var(--color-primary-50);color:var(--color-primary-700)}
+.chip{background:var(--color-surface-muted);border-color:transparent;box-shadow:none}
+.chip.on{background:var(--color-text-primary);color:var(--color-bg-card);border-color:var(--color-text-primary)}
+.tool-icon{background:var(--color-surface-muted);color:var(--color-text-secondary)}
+/* 图片以规整网格呈现，保留既有相册位置和示例标记。 */
+.album{border:0;padding:0;background:var(--color-bg-page)}
+.album h3{margin-bottom:var(--space-md)}
+.collage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-sm);height:calc(var(--unit)*2.6);margin:0}
+.collage .pet-photo,.collage .a,.collage .b,.collage .c{position:static;inset:auto;width:100%;height:100%;transform:none;border:0;border-radius:var(--radius-md);box-shadow:none}
+.collage figcaption{display:none}
+.album-footer{margin-top:var(--space-sm);color:var(--color-text-secondary)}
+/* 健康日历：平面日期条和带有类别图标的灰色任务行。 */
+.caltop{padding:var(--space-md);background:var(--color-primary-50);border-radius:var(--radius-lg);margin-bottom:var(--space-lg)}
+.caltop h2{font-size:var(--font-size-h2)}
+.monthpill{background:transparent;box-shadow:none;border-radius:var(--radius-md)}
+.wd{background:var(--color-surface-muted);border-radius:var(--radius-md);box-shadow:none;min-height:calc(var(--unit)*1.5)}
+.wd.sel,.mg.sel{background:var(--color-text-primary);color:var(--color-bg-card)}
+.wd.sel small,.wd.sel em,.wd.sel.today b{color:var(--color-bg-card)}
+.wd.today b,.mg.today b{color:var(--color-primary-700)}
+.stats .sd-stat{background:var(--color-surface-muted);box-shadow:none;border-radius:var(--radius-md)}
+.slot{gap:var(--space-sm)}
+.slot__t{width:var(--space-touch);padding-top:var(--space-md)}
+.slotcard,.chkrow,.ev{background:var(--color-surface-muted);border-radius:var(--radius-lg);box-shadow:none}
+.slotcard__ic,.chkrow__thumb,.ev__ic{background:var(--color-primary-100);color:var(--color-primary-700);box-shadow:none}
+.k-vaccine{--ic:var(--color-violet);--ic-bg:color-mix(in srgb,var(--color-violet) 12%,var(--color-bg-card))}
+.k-deworm{--ic:var(--color-primary-700);--ic-bg:var(--color-primary-100)}
+.pill--done,.chkrow__st--ok{background:var(--color-primary-50);color:var(--color-primary-700);box-shadow:none}
+.pill--warn{background:var(--tint-error);color:var(--color-error)}
+.pill--soft{background:var(--color-primary-50);color:var(--color-primary-700)}
+.pill__dot{background:var(--color-primary-700)}
+.sec{font-size:var(--font-size-h3)}
+.growth{background:var(--color-primary-50);box-shadow:none;border-radius:var(--radius-lg);padding:var(--space-md)}
+.growth__m{width:var(--space-touch-lg);height:var(--space-touch-lg)}
+.growth h2{font-size:var(--font-size-h2)}
+.quick button{box-shadow:none;border:thin solid var(--color-border-base);background:var(--color-bg-card);border-radius:var(--radius-md)}
+.quick i{background:var(--color-primary-50)}
+.ev__delta.up{background:var(--color-primary-100);color:var(--color-primary-700)}
+/* 社区沿用原有筛选和发布，将视觉统一为线性标签与低阴影卡片。 */
+.phone[data-page="community"] .commnav{padding-top:0;margin-top:0}
+.commnav{background:var(--color-bg-page);margin:0 0 var(--space-lg);padding:0;justify-content:flex-start;gap:var(--space-xl);border-bottom:thin solid var(--color-divider)}
+.commnav button{box-shadow:none;font-size:var(--font-size-body)}
+.commnav button.on{color:var(--color-nav-active);border-bottom-color:var(--color-nav-active)}
+.post{box-shadow:none;border:thin solid var(--color-divider);border-radius:var(--radius-lg)}
+.post__txt{background:var(--color-primary-50)}
+.post__like.on{color:var(--color-nav-active)}
+.fab{border-radius:var(--radius-full);box-shadow:var(--shadow-md)}
+/* 参考11pets的白色底部工具栏；四个标签始终可见。 */
+.phone .sd-tabbar{bottom:0;left:0;transform:none;width:100%;max-width:none;border:0;border-top:thin solid var(--color-divider);border-radius:0;box-shadow:none;padding:var(--space-xs) var(--space-sm) calc(var(--space-sm) + env(safe-area-inset-bottom));background:var(--color-bg-card)}
+.sd-tabbar__item,.sd-tabbar__item.on{flex:1;height:var(--space-touch-lg);border-radius:0;background:transparent;box-shadow:none;display:flex;flex-direction:column;gap:var(--space-xs);color:var(--color-text-secondary)}
+.sd-tabbar__item.on{color:var(--color-nav-active)}
+.sd-tabbar__item span,.sd-tabbar__item.on span{display:block}
+/* 底部表单保留人工核对流程，仅改变样式和呈现位置。 */
+.sheet{align-items:flex-end;padding:0}
+.panel{width:100%;max-width:none;max-height:90%;border-radius:var(--radius-xl) var(--radius-xl) 0 0;padding:var(--space-xl);box-shadow:var(--shadow-lg)}
+.panel::before{content:"";display:block;width:var(--space-3xl);height:var(--space-xs);margin:0 auto var(--space-lg);border-radius:var(--radius-full);background:var(--color-text-disabled)}
+.pick__date{color:var(--color-text-secondary);font-size:var(--font-size-caption)}
+.pick__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);margin-bottom:var(--space-lg)}
+.pick__opt{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-xs);padding:var(--space-lg);background:var(--color-surface-muted);border-radius:var(--radius-lg);text-align:left}
+.pick__opt i{font-size:var(--font-size-h1);font-style:normal}.pick__opt small{color:var(--color-text-secondary);font-size:var(--font-size-caption)}.pick__cancel{width:100%}
+.demotag{display:inline-flex;align-items:center;padding:0 var(--space-sm);border-radius:var(--radius-sm);background:var(--color-surface-muted);color:var(--color-text-secondary);font-size:var(--font-size-caption)}
+.demotag--lg{margin-left:var(--space-sm)}
+.toast{background:var(--color-text-primary);color:var(--color-bg-card)}

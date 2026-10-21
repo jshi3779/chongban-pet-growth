@@ -52,5 +52,4 @@ export interface AppState {
   pets: Pet[];
   records: PetRecord[];
   region: { city: string; district: string };
-  memberInterest: boolean;
 }

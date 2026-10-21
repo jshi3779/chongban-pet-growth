@@ -3,7 +3,7 @@ import { KIND, age, dayDiff, recsOf } from '../utils';
 import { isLife, withDemo } from '../demo';
 import type { AppState, PetRecord } from '../types';
 import { Mascot } from './Mascot';
-import { PetSwitch } from './Common';
+import { PetSwitch, PetAvatar } from './Common';
 
 type F = Extract<AppState['filter'], 'all' | 'weight' | 'milestone'>;
 const FILTERS: [F, string][] = [['all', '全部'], ['weight', '体重'], ['milestone', '成长瞬间']];
@@ -80,7 +80,7 @@ export function TimelineView() {
     <>
       <PetSwitch />
       <header className="growth">
-        <div className="growth__m"><Mascot type={pet.type} label={`${pet.name}的宠物形象`} /></div>
+        <div className="growth__m"><PetAvatar pet={pet} /></div>
         <div>
           <h2>{pet.name}的成长尺</h2>
           <p>{pet.birthday ? `${age(pet.birthday)}` : '成长中'}{cur ? ` · 现在 ${cur.value} kg` : ''}{demo && <span className="demotag demotag--lg">示例</span>}</p>

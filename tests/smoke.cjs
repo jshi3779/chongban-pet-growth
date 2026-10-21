@@ -35,7 +35,7 @@ const assert = require('node:assert/strict');
  await tab('home');await page.locator('[data-act="addpet"]').click();await page.locator('[name="name"]').fill('测试狗狗');await page.locator('[name="type"]').selectOption('狗');await save();assert.match(await page.locator('.pethead h2').innerText(),/测试狗狗/);
  assert.match(await page.locator('.companion').first().innerText(),/还没有体重记录/);
  await page.locator('[data-pet="p1"]').click();
- await tab('calendar');assert.equal(await page.locator('.wd').count(),7);await page.locator('[data-calnav="1"]').click();
+ await tab('calendar');assert.equal(await page.locator('[data-act="addpet"]').count(),0);assert.equal(await page.locator('.pets [data-pet="p1"] img').getAttribute('src'),'./assets/cat.jpg');assert.equal(await page.locator('.wd').count(),7);await page.locator('[data-calnav="1"]').click();
  await page.locator('.wd').first().click();await tab('timeline');await page.locator('[data-filter="weight"]').click();assert.equal(await page.locator('.ev').count(),7);
  const before=(await state()).records.length;page.once('dialog',d=>d.accept());await page.locator('[data-del]').first().click();assert.equal((await state()).records.length,before-1);
  // More than eight historical entries must remain reachable after consolidation.

@@ -93,3 +93,8 @@ main{padding:var(--space-xl) var(--space-lg) 0}
 .toast{background:var(--color-text-primary);color:var(--color-bg-card)}
 /* 日历精简后，月份切换组在整张标题卡内居中。 */
 .caltop .monthpill{justify-content:center}
+/* ⚠️ 未覆盖样式：圆形宠物照片，使用兜底 Token --space-3xl / --radius-full，图片适应既有头像容器。 */
+.pet-avatar{display:inline-flex;align-items:center;justify-content:center;width:var(--space-3xl);height:var(--space-3xl);border-radius:var(--radius-full);overflow:hidden;flex:none;background:var(--color-primary-50)}
+.pet-avatar img{display:block;width:100%;height:100%;object-fit:cover}
+.pet-chip{display:inline-flex;align-items:center;gap:var(--space-sm);height:auto;min-height:var(--space-touch-lg);padding:var(--space-xs) var(--space-md) var(--space-xs) var(--space-xs)}
+.bigface .pet-avatar,.growth__m .pet-avatar{width:100%;height:100%}

@@ -612,5 +612,86 @@
       "type": "user-screenshot",
       "reference": "3-month activity heatmap"
     }
+  },
+  "color.profile.blue": {
+    "value": "#4d96f6",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.light": {
+    "value": "#a6cdff",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.dark": {
+    "value": "#2c7bdd",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.paper": {
+    "value": "#ffffff",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.ink": {
+    "value": "#343638",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.meta": {
+    "value": "#68727d",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.soft": {
+    "value": "#f5f5f7",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "color.profile.pink": {
+    "value": "#ffc5d9",
+    "type": "color",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
+  },
+  "font.size.profile-name": {
+    "value": 52,
+    "type": "dimension",
+    "group": "档案参考图",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "uploaded right-hand pet profile"
+    }
   }
 }

@@ -41,3 +41,7 @@ npm run build            # 类型检查 + 构建
 保留四个现有页面、相册在宠物资料下方且紧邻体重卡、统一体重录入弹窗、导出图标、本地存储格式。Plus功能已按用户要求移除。
 
 预览：https://jshi3779.github.io/chongban-pet-growth/
+
+### 最新档案页覆盖（用户指定）
+
+档案页根据用户提供的右侧屏幕采用蓝色宠物封面与叠层白卡，仅作用于data-page=home，覆盖层src/styles/profile.css置于入口最后；其他页面保持11pets参考视觉。新增profile色彩和字号Token必须在theme.css与tokens/base.json同步。猫封面使用从原本地示例照片提取透明背景的WebP，不冒充用户实际上传照片。宠物切换仅显示头像，通过aria-label/title保留姓名。

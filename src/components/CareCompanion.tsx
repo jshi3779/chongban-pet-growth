@@ -1,7 +1,7 @@
 import { useApp } from '../ctx';
 import { careSummary } from '../product';
 
-export function CareCompanion() {
+export function CareCompanion({ showActions = true }: { showActions?: boolean }) {
   const { s, pet, openPost, patch, go, openArchive } = useApp();
   const { week, due } = careSummary(s, pet);
   return <>
@@ -11,11 +11,11 @@ export function CareCompanion() {
       <p className="product-note">按你录入的记录整理 · 初始档案含演示数据</p>
       <b>近7天记录 {week.length} 条</b>
       <p>{due.length ? `${due.length} 项逾期或14天内到期，请核对提醒日期。` : '暂无已录入的近期到期事项；不代表已完成全部照护。'}</p>
-      <button className="sd-btn sd-btn--primary" data-act="view-health" onClick={() => go('calendar')}>查看健康日历与记录</button>
+      {showActions && <><button className="sd-btn sd-btn--primary" data-act="view-health" onClick={() => go('calendar')}>查看健康日历与记录</button>
       <div className="product-actions">
         <button className="sd-btn sd-btn--default" data-act="share-growth" onClick={() => openPost({ title: `${pet.name}的成长小记`, body: `这周和${pet.name}一起留下了${week.length}条成长记录。最想记住的小事是：\n` })}>晒日常</button>
         <button className="sd-btn sd-btn--default" data-act="find-nearby" onClick={() => { patch({ comm: 'nearby' }); go('community'); }}>附近宠友</button>
-      </div>
+      </div></>}
     </section>
   </>;
 }

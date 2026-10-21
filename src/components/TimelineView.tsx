@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useApp } from '../ctx';
 import { KIND, age, dayDiff, recsOf } from '../utils';
 import { isLife, withDemo } from '../demo';
@@ -17,6 +18,8 @@ function label(m: number) {
 }
 
 export function TimelineView() {
+  const [adding, setAdding] = useState(false);
+  const [entry, setEntry] = useState<'weight' | 'milestone'>('weight');
   const { s: real, pet, patch, openRecord, del } = useApp();
   const { st: s, demo } = withDemo(real, pet.id);
   const filter: F = s.filter === 'weight' || s.filter === 'milestone' ? s.filter : 'all';
@@ -86,17 +89,15 @@ export function TimelineView() {
           <p>{pet.birthday ? `${age(pet.birthday)}` : '成长中'}{cur ? ` · 现在 ${cur.value} kg` : ''}{demo && <span className="demotag demotag--lg">示例</span>}</p>
         </div>
       </header>
-      <div className="quick quick--mb quick--two">
-        <button data-add="weight" onClick={() => openRecord('weight')}><i>⚖️</i>记体重</button>
-        <button data-add="milestone" onClick={() => openRecord('milestone')}><i>🎉</i>成长瞬间</button>
-      </div>
       <div className="filters">
         {FILTERS.map(([k, n]) => <button key={k} className={`chip ${filter === k ? 'on' : ''}`} data-filter={k} onClick={() => patch({ filter: k })}>{n}</button>)}
       </div>
       <div className="ruler" aria-label={`${pet.name}的成长时间轴，越往上越成长`}>
         <p className="ruler__top">↑ 越往上，{pet.name}越大</p>
+        <section className="seg seg--entry"><div className="seg__ruler"><span className="seg__tick" /></div><div className="seg__body"><button className="ruler-entry" aria-label="添加成长记录" onClick={() => setAdding(true)}>＋</button></div></section>
         {rows}
       </div>
+      {adding && <div className="sheet"><div className="mask" onClick={() => setAdding(false)} /><section className="panel" role="dialog" aria-modal="true" aria-label="添加成长记录"><h4>留下新的成长记录</h4><div className="filters">{(['weight', 'milestone'] as const).map(k => <button className={`chip ${entry === k ? 'on' : ''}`} key={k} aria-pressed={entry === k} onClick={() => setEntry(k)}>{k === 'weight' ? '记体重' : '成长瞬间'}</button>)}</div><div className="act"><button className="sd-btn sd-btn--default" onClick={() => setAdding(false)}>取消</button><button className="sd-btn sd-btn--primary" onClick={() => { setAdding(false); openRecord(entry); }}>继续</button></div></section></div>}
     </>
   );
 }

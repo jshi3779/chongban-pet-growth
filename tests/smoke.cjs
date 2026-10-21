@@ -20,9 +20,10 @@ const assert = require('node:assert/strict');
  await page.locator('[data-close]').click();await page.getByRole('button',{name:'档案导出与备份',exact:true}).click();const download=page.waitForEvent('download');await page.locator('[data-act="export-health"]').click();const file=await download;assert.match(file.suggestedFilename(),/照护档案.txt/);
  const chunks=[];for await(const chunk of await file.createReadStream())chunks.push(chunk);assert.match(Buffer.concat(chunks).toString('utf8'),/年糕 · 照护档案/);
  const backupEvent=page.waitForEvent('download');await page.locator('[data-act="export-backup"]').click();const backup=await backupEvent;const bytes=[];for await(const chunk of await backup.createReadStream())bytes.push(chunk);assert(Array.isArray(JSON.parse(Buffer.concat(bytes).toString('utf8')).pets));await page.locator('[data-close]').click();
- await page.locator('[data-act="share-growth"]').click();assert.match(await page.locator('[name="title"]').inputValue(),/年糕的成长小记/);await page.locator('[data-close]').click();
- await page.locator('[data-act="find-nearby"]').click();assert.equal(await page.locator('[data-comm="nearby"]').getAttribute('class'),'on');await tab('home');
- await page.locator('[data-act="view-health"]').click();assert.equal((await state()).tab,'calendar');await tab('home');
+ await page.getByRole('button',{name:'设置',exact:true}).click();assert.equal(await page.getByRole('dialog',{name:'设置',exact:true}).count(),1);await page.getByRole('button',{name:'关闭',exact:true}).click();
+ assert.equal(await page.locator('.profile-shortcuts').count(),0);
+ assert.equal(await page.locator('.sd-tabbar span').count(),0);
+ await tab('timeline');await page.getByRole('button',{name:'添加成长记录',exact:true}).click();await page.getByRole('dialog',{name:'添加成长记录',exact:true}).getByRole('button',{name:'成长瞬间',exact:true}).click();await page.getByRole('button',{name:'继续',exact:true}).click();await page.locator('[name="name"]').fill('第一次散步');await save();assert.equal((await state()).records.at(-1).kind,'milestone');await tab('home');
  await tab('community');await page.locator('[data-comm="nearby"]').click();
  await page.locator('[name="city"]').fill('上海');await page.locator('[name="district"]').fill('徐汇');await page.getByRole('button',{name:'保存地区'}).click();assert.equal(await page.locator('[data-post]').count(),2);
  await page.getByRole('button',{name:'猫',exact:true}).click();assert.equal(await page.locator('[data-post]').count(),1);
@@ -48,3 +49,4 @@ const assert = require('node:assert/strict');
  }
  assert.deepEqual(errors,[]);await browser.close();console.log('PASS: editable quick entry, persistence, export, regional filtering/publishing, likes, pet switching, original calendar/timeline/delete, 4 widths, no runtime errors');
 })().catch(e=>{console.error(e);process.exit(1)});
+

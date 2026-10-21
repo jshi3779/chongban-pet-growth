@@ -45,3 +45,6 @@ npm run build            # 类型检查 + 构建
 ### 最新档案页覆盖（用户指定）
 
 档案页根据用户提供的右侧屏幕采用蓝色宠物封面与叠层白卡，仅作用于data-page=home，覆盖层src/styles/profile.css置于入口最后；其他页面保持11pets参考视觉。新增profile色彩和字号Token必须在theme.css与tokens/base.json同步。猫封面使用从原本地示例照片提取透明背景的WebP，不冒充用户实际上传照片。宠物切换仅显示头像，通过aria-label/title保留姓名。
+
+### 全局蓝白视觉更新
+用户最新要求所有页面统一为提供的蓝白宠物App参考图，最终覆盖层为src/styles/unified.css，替代11pets配色。导航仅图标，日历仅保留日期切换，成长尺首项统一添加入口，档案移除四个快捷功能并提供左上角设置。

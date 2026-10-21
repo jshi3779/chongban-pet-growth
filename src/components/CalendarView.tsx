@@ -40,7 +40,7 @@ export function CalendarView() {
     <>
       <PetSwitch />
       <div className="caltop">
-        <div className="calendar-heading"><h2>健康日历</h2><button className="tool-icon" aria-label={`全部健康记录（${all.length}条）`} title="全部健康记录" onClick={openHistory}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H5V3h1m9 0v5h4M8 12h8M8 16h8" /></svg></button></div>
+
         <div className="monthpill">
           <button className="x" aria-label={open ? '上个月' : '前3个月'} data-calnav="-1" onClick={() => step(-1)}>‹</button>
           <span>{monthLabel}</span>
@@ -73,7 +73,7 @@ export function CalendarView() {
       )}
 
 
-      <div className="sec">待办提醒{demo && <span className="demotag demotag--lg">示例日程</span>}</div>
+      <div className="sec calendar-heading"><span>待办提醒</span><button className="tool-icon" aria-label={`全部健康记录（${all.length}条）`} onClick={openHistory}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H5V3h1m9 0v5h4M8 12h8M8 16h8" /></svg></button>{demo && <span className="demotag demotag--lg">示例日程</span>}</div>
       <div className="chk">
         {rem.map(({ r, left }) => (
           <button key={`u${r.id}`} className="chkrow" onClick={() => go(r.next as string)}>

@@ -9,6 +9,7 @@ export interface Api {
   openRecord: (kind: Kind, date?: string, value?: string) => void;
   openPet: () => void;
   openArchive: () => void;
+  openHistory: () => void;
   del: (id: number) => void;
   openPick: (date: string) => void;
   openPost: (draft?: { title: string; body: string }) => void;

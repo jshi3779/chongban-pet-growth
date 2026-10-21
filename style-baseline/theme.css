@@ -1,6 +1,12 @@
 /* 宠伴设计基线 v2：用户指定参考11pets官方商店界面；白底、浅青信息区、灰色列表、洋红导航。 */
 
 :root {
+  /* User-supplied 3-month activity reference. */
+  --color-activity-0:#f1f3f4;
+  --color-activity-1:#c5e1ff;
+  --color-activity-2:#77b9ff;
+  --color-activity-3:#1687f6;
+  --color-activity-4:#075baa;
   /* 11pets official-store UI reference, user-requested refresh, 2026-10-21. */
   --color-nav-active:#b13c99;
   --color-surface-muted:#f5f7f7;

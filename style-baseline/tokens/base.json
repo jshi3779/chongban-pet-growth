@@ -567,5 +567,50 @@
       "type": "user-request",
       "reference": "11pets official Google Play screenshots"
     }
+  },
+  "color.activity.0": {
+    "value": "#f1f3f4",
+    "type": "color",
+    "group": "健康活动",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "3-month activity heatmap"
+    }
+  },
+  "color.activity.1": {
+    "value": "#c5e1ff",
+    "type": "color",
+    "group": "健康活动",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "3-month activity heatmap"
+    }
+  },
+  "color.activity.2": {
+    "value": "#77b9ff",
+    "type": "color",
+    "group": "健康活动",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "3-month activity heatmap"
+    }
+  },
+  "color.activity.3": {
+    "value": "#1687f6",
+    "type": "color",
+    "group": "健康活动",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "3-month activity heatmap"
+    }
+  },
+  "color.activity.4": {
+    "value": "#075baa",
+    "type": "color",
+    "group": "健康活动",
+    "source": {
+      "type": "user-screenshot",
+      "reference": "3-month activity heatmap"
+    }
   }
 }
